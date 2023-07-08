@@ -30,6 +30,12 @@
       console.log('guardando data....', newEnterprise)
     } else { // Update
       console.log('>>> guardando la actualización...')
+
+      const enterpriseIndexFound = enterprises.value.findIndex(
+        enterprise => enterprise.id === id
+      )
+
+      enterprises.value[enterpriseIndexFound] = { id, name, owner }
     }
 
     formData.value = {
