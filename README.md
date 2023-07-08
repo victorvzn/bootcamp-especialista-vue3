@@ -12,7 +12,7 @@ This template should help get you started developing with Vue 3 in Vite.
 * [x] Listar las empresas y mostrar su nombre y propietario.
 * [x] Crear un formulario que permita crear una nueva empresa.
 * [x] Crear un formulario que permita actualizar una empresa.
-* [ ] Crear un formulario que permita eliminar una empresa.
+* [x] Crear un botón que permita eliminar una empresa.
 
 ## Recommended IDE Setup
 
