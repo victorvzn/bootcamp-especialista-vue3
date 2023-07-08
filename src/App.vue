@@ -1,8 +1,28 @@
 <script setup>
+  import empresas from './empresas.json'
 </script>
 
 <template>
-  <h1>Primer challenge</h1>
+  <div class="container">
+    <h1>Primer challenge</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="empresa in empresas" :key="empresa.id">
+          <td>{{ empresa.id }}</td>
+          <td>{{ empresa.name }}</td>
+          <td>{{ empresa.owner }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped>
