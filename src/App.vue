@@ -61,8 +61,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="empresa in enterprises" :key="empresa.id">
-            <td>{{ empresa.id }}</td>
+          <tr v-for="(empresa, index) in enterprises" :key="empresa.id">
+            <td>{{ index + 1 }}</td>
             <td>{{ empresa.name }}</td>
             <td>{{ empresa.owner }}</td>
           </tr>
