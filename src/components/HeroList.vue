@@ -5,7 +5,8 @@ import IconGenderMale from '../components/icons/otro/IconGenderMale.vue'
 import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
 
 const page = ref(1)
-const limit = ref(5)
+const limit = ref(4)
+const count = ref(100)
 
 // Vue 2
 // export default { 
@@ -26,8 +27,38 @@ defineProps({
 
 const emit = defineEmits(['onPage'])
 
+const firstPage = () => {
+  if (page.value === 1) return
+
+  page.value = 1
+  
+  emit('onPage', page.value)
+}
+
 const nextPage = () => {
+  const lastPage = count.value / limit.value
+
+  if (page.value >= lastPage) return
+
   page.value = page.value + 1
+  
+  emit('onPage', page.value)
+}
+
+const prevPage = () => {
+  if (page.value === 1) return
+
+  page.value = page.value - 1
+  
+  emit('onPage', page.value)
+}
+
+const lastPage = () => {
+  const lastPage = count.value / limit.value // 100 / 4 = 25 pages
+
+  if (page.value === lastPage) return
+
+  page.value = lastPage
 
   emit('onPage', page.value)
 }
@@ -66,11 +97,11 @@ const nextPage = () => {
   </table>
 
   <div class="pagination">
-    <button>First</button>
-    <button>Previous</button>
-    <span>{{ page }} of 10</span>
+    <button @click="firstPage">First</button>
+    <button @click="prevPage">Previous</button>
+    <button disabled class="contrast outline">{{ page }} of {{ count / limit }}</button>
     <button @click="nextPage">Next</button>
-    <button>Last</button>
+    <button @click="lastPage">Last</button>
   </div>
 </template>
 
@@ -88,5 +119,9 @@ const nextPage = () => {
 .pagination {
   display: flex;
   gap: 1rem;
+}
+
+.pagination div {
+  width: 100px;
 }
 </style>
