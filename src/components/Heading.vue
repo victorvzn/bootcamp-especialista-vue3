@@ -1,6 +1,19 @@
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  subtitle: {
+    type: String,
+    required: false
+  }
+})
+</script>
+
 <template>
   <div class="headings">
-    <h2>Super Heroes</h2>
-    <h3>¡Elije a tu super hero favorito!</h3>
+    <h2>{{ title }}</h2>
+    <h3 v-if="subtitle">{{ subtitle }}</h3>
   </div>
 </template>

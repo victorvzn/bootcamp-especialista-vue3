@@ -16,7 +16,9 @@ onBeforeMount(async () => heroes.value = await fetchHeroes())
   <Header />
 
   <main class="container">
-    <Heading />
+    <Heading
+      title="Super Heroes"
+    />
 
     <HeroList :heroes="heroes" />
   </main>

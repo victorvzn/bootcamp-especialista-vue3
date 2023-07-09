@@ -49,22 +49,6 @@ defineProps({
           <span v-else>-</span>
         </th>
       </tr>
-
-      <tr>
-        <th>1</th>
-        <td>
-          <img src="" width="156" height="88" />
-        </td>
-        <td>
-          <div>Hero name</div>
-          <div>Real name: ----</div>
-          <div>Aliases: ----</div>
-          <div>Birth: ----</div>
-        </td>
-        <td>
-          Gender
-        </td>
-      </tr>
     </tbody>
 
     <!-- Pagination here -->
