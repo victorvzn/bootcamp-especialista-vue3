@@ -1,6 +1,10 @@
-# .
+# Bootcamp Especialista Vue 3 - G01
 
 This template should help get you started developing with Vue 3 in Vite.
+
+## Requerimientos
+
+* [ ] Necesitamos crear una lista de heroes en un arreglo con datos básicos.
 
 ## Recommended IDE Setup
 
