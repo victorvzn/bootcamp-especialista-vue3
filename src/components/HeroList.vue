@@ -1,6 +1,11 @@
 <script setup>
+import { ref } from 'vue'
+
 import IconGenderMale from '../components/icons/otro/IconGenderMale.vue'
 import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
+
+const page = ref(1)
+const limit = ref(5)
 
 // Vue 2
 // export default { 
@@ -18,6 +23,14 @@ defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['onPage'])
+
+const nextPage = () => {
+  page.value = page.value + 1
+
+  emit('onPage', page.value)
+}
 </script>
 
 <template>
@@ -50,9 +63,15 @@ defineProps({
         </th>
       </tr>
     </tbody>
-
-    <!-- Pagination here -->
   </table>
+
+  <div class="pagination">
+    <button>First</button>
+    <button>Previous</button>
+    <span>{{ page }} of 10</span>
+    <button @click="nextPage">Next</button>
+    <button>Last</button>
+  </div>
 </template>
 
 <style scoped>
@@ -64,5 +83,10 @@ defineProps({
 }
 .gender--none {
   fill: #d7ef1c;
+}
+
+.pagination {
+  display: flex;
+  gap: 1rem;
 }
 </style>
