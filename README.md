@@ -5,7 +5,7 @@ This template should help get you started developing with Vue 3 in Vite.
 ## Requerimientos
 
 * [x] Necesitamos crear una lista de heroes en un arreglo con datos básicos.
-* [ ] Listar las heroes y mostrar su datos en una lista.
+* [x] Listar las heroes y mostrar su datos en una lista.
 
 ## Recommended IDE Setup
 
