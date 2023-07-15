@@ -11,6 +11,7 @@ const limit = ref(4)
 const count = ref(100)
 const isOpenModal = ref(false)
 const selectedHero = ref(null)
+const query = ref('')
 
 // Vue 2
 // export default { 
@@ -29,7 +30,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPage'])
+const emit = defineEmits(['onPage', 'onSearch'])
 
 const firstPage = () => {
   if (page.value === 1) return
@@ -74,6 +75,13 @@ const handleShowModal = (imageUrl) => {
 </script>
 
 <template>
+  <input
+    type="text"
+    placeholder="Search by name"
+    v-model="query"
+    @keyup="emit('onSearch', query)"
+  />
+  
   <table role="grid">
     <thead>
       <tr>

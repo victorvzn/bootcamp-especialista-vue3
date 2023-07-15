@@ -14,6 +14,11 @@ const handlePage = async (value) => {
   heroes.value = await fetchHeroes({ page: value, limit: 4 })
 }
 
+const hadleSearchByName = async (name) => {
+  console.log({ name })
+  heroes.value = await fetchHeroes({ page: 1, limit: 4, name })
+}
+
 onBeforeMount(async () => heroes.value = await fetchHeroes())
 </script>
 
@@ -25,7 +30,7 @@ onBeforeMount(async () => heroes.value = await fetchHeroes())
       title="Super Heroes"
     />
 
-    <HeroList :heroes="heroes" @onPage="handlePage" />
+    <HeroList :heroes="heroes" @onPage="handlePage" @onSearch="hadleSearchByName" />
   </main>
 </template>
 
