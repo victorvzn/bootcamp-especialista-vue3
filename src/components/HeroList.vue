@@ -12,6 +12,7 @@ const count = ref(100)
 const isOpenModal = ref(false)
 const selectedHero = ref(null)
 const query = ref('')
+const filterByGender = ref('')
 
 // Vue 2
 // export default { 
@@ -30,7 +31,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPage', 'onSearch'])
+const emit = defineEmits(['onPage', 'onSearch', 'onFilter'])
 
 const firstPage = () => {
   if (page.value === 1) return
@@ -75,12 +76,24 @@ const handleShowModal = (imageUrl) => {
 </script>
 
 <template>
-  <input
-    type="text"
-    placeholder="Search by name"
-    v-model="query"
-    @keyup="emit('onSearch', query)"
-  />
+  <div class="grid">
+    <div>
+      <input
+        type="text"
+        placeholder="Search by name"
+        v-model="query"
+        @keyup="emit('onSearch', query)"
+      />
+    </div>
+    <div>
+      <select v-model="filterByGender" @click="emit('onFilter', filterByGender)">
+        <option value="" selected>Select a gender…</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+        <option value="0">Other</option>
+      </select>
+    </div>
+  </div>
 
   <table role="grid">
     <thead>
