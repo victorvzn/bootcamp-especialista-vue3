@@ -10,7 +10,7 @@ This template should help get you started developing with Vue 3 in Vite.
 * [x] Añadir paginación a la lista de heroes
 * [x] Abrir en un modal la imagen extendida del hero [TODO]
 * [x] Añadir un buscador por el nombre del hero [TODO]
-* [ ] Añadir un filtro por el campo gender [TODO]
+* [x] Añadir un filtro por el campo gender [TODO]
 
 ## Recommended IDE Setup
 
