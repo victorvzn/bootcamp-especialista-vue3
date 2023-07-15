@@ -4,6 +4,7 @@ import { ref, onBeforeMount } from 'vue'
 import Header from './components/Header.vue'
 import Heading from './components/Heading.vue'
 import HeroList from './components/HeroList.vue'
+import Form from '@/components/Form.vue'
 
 import { fetchHeroes } from './services/heroes'
 
@@ -37,17 +38,25 @@ onBeforeMount(async () => heroes.value = await fetchHeroes())
 <template>
   <Header />
 
-  <main class="container">
+  <main class="container-fluid">
     <Heading
       title="Super Heroes"
     />
 
-    <HeroList
-      :heroes="heroes"
-      @onPage="handlePage"
-      @onSearch="hadleSearchByName"
-      @onFilter="handleFilterByGender"
-    />
-  </main>
+    <div class="grid">
+      <div>
+        <HeroList
+          :heroes="heroes"
+          @onPage="handlePage"
+          @onSearch="hadleSearchByName"
+          @onFilter="handleFilterByGender"
+        />
+      </div>
+      <div>
+        <Form />
+      </div>
+    </div>
+
+    </main>
 </template>
 

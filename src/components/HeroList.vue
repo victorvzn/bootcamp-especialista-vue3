@@ -6,6 +6,7 @@ import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
 
 import ModalBase from '@/components/shared/ModalBase.vue'
 
+
 const page = ref(1)
 const limit = ref(4)
 const count = ref(100)
