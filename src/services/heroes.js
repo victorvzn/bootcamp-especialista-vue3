@@ -10,3 +10,18 @@ export const fetchHeroes = async (
 
   return data
 }
+
+export const createHero = async ({ form }) => {
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(form)
+  }
+
+  const response = await fetch(`${BASE_URL}/heroes`, options)
+
+  const data = await response.json()
+
+  console.log(data)
+
+  return data
+}
