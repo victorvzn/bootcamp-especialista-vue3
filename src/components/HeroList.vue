@@ -4,9 +4,13 @@ import { ref } from 'vue'
 import IconGenderMale from '../components/icons/otro/IconGenderMale.vue'
 import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
 
+import ModalBase from '@/components/shared/ModalBase.vue'
+
 const page = ref(1)
 const limit = ref(4)
 const count = ref(100)
+const isOpenModal = ref(false)
+const selectedHero = ref(null)
 
 // Vue 2
 // export default { 
@@ -62,6 +66,11 @@ const lastPage = () => {
 
   emit('onPage', page.value)
 }
+
+const handleShowModal = (imageUrl) => {
+  isOpenModal.value = !isOpenModal.value
+  selectedHero.value = imageUrl
+}
 </script>
 
 <template>
@@ -79,7 +88,12 @@ const lastPage = () => {
       <tr v-for="hero in heroes" :key="hero.id">
         <th>{{ hero.id }}</th>
         <td>
-          <img :src="hero.image_screen_url" width="156" height="88" />
+          <img
+            width="156"
+            height="88"
+            :src="hero.image_screen_url"
+            @click="handleShowModal(hero)"
+          />
         </td>
         <td>
           <div>{{ hero.name }}</div>
@@ -103,6 +117,13 @@ const lastPage = () => {
     <button @click="nextPage">Next</button>
     <button @click="lastPage">Last</button>
   </div>
+
+  <ModalBase
+    :title="`Selected hero ${selectedHero?.name}`"
+    :open="isOpenModal"
+    @onClose="handleShowModal">
+    <img :src="selectedHero?.image_screen_large_url" />
+  </ModalBase>
 </template>
 
 <style scoped>
