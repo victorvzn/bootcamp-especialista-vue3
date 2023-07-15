@@ -6,10 +6,12 @@ import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
 
 import ModalBase from '@/components/shared/ModalBase.vue'
 
+import { deleteHero } from '@/services/heroes.js'
+
 
 const page = ref(1)
 const limit = ref(4)
-const count = ref(100)
+const count = ref(75)
 const isOpenModal = ref(false)
 const selectedHero = ref(null)
 const query = ref('')
@@ -43,7 +45,7 @@ const firstPage = () => {
 }
 
 const nextPage = () => {
-  const lastPage = count.value / limit.value
+  const lastPage = Math.ceil(count.value / limit.value)
 
   if (page.value >= lastPage) return
 
@@ -61,7 +63,7 @@ const prevPage = () => {
 }
 
 const lastPage = () => {
-  const lastPage = count.value / limit.value // 100 / 4 = 25 pages
+  const lastPage = Math.ceil(count.value / limit.value) // 100 / 4 = 25 pages
 
   if (page.value === lastPage) return
 
@@ -73,6 +75,23 @@ const lastPage = () => {
 const handleShowModal = (imageUrl) => {
   isOpenModal.value = !isOpenModal.value
   selectedHero.value = imageUrl
+}
+
+const handleRemoveHero = async (hero) => {
+  // operaciones sobre el api con el metodo DELETE
+  console.log(hero)
+
+  const res = await deleteHero({ id: hero.id })
+
+  console.log(res)
+
+  // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
+}
+
+const handleUpdateHero = async (hero) => {
+  
+  // TODO: Ejecutar la accion para actualizar un registro
+  // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
 }
 </script>
 
@@ -103,6 +122,7 @@ const handleShowModal = (imageUrl) => {
         <th>Image</th>
         <th>Name</th>
         <th>Gender</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
@@ -128,6 +148,10 @@ const handleShowModal = (imageUrl) => {
           <IconGenderFemale  v-else-if="hero.gender === 2" class="gender--female" />
           <span v-else>-</span>
         </th>
+        <th>
+          <button role="button" @click="handleRemoveHero(hero)">❌</button>
+          <button role="button" @click="handleUpdateHero(hero)">✏</button>
+        </th>
       </tr>
     </tbody>
   </table>
@@ -135,7 +159,7 @@ const handleShowModal = (imageUrl) => {
   <div class="pagination">
     <button @click="firstPage">First</button>
     <button @click="prevPage">Previous</button>
-    <button disabled class="contrast outline">{{ page }} of {{ count / limit }}</button>
+    <button disabled class="contrast outline">{{ page }} of {{ Math.ceil(count / limit) }}</button>
     <button @click="nextPage">Next</button>
     <button @click="lastPage">Last</button>
   </div>

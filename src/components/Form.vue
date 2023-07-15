@@ -1,18 +1,35 @@
 <script setup>
 import { ref } from 'vue'
+import { createHero } from '@/services/heroes';
 
 const formData = ref({
   name: '',
   realName: '',
   gender: '',
   birth: '',
+
+  aliases: 'aliases',
+  deck: 'deck description',
+  image_screen_large_url: 'url_large',
+  image_screen_url: 'url'
 })
 
-const handleForm = (event) => {
+const handleForm = async (event) => {
   const newHero = formData.value
+
+  newHero.gender = Number(newHero.gender)
+
+  newHero['real_name'] = newHero.realName
+
+  delete newHero.realName
 
   console.log(newHero)
   
+  const res = await createHero({ form: newHero })
+
+  console.log(res)
+
+  // TODO: Validar la respuesta y mostrar un mensaje de exito o de error
 }
 </script>
 
