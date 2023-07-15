@@ -7,12 +7,19 @@ const formData = ref({
   gender: '',
   birth: '',
 })
+
+const handleForm = (event) => {
+  const newHero = formData.value
+
+  console.log(newHero)
+  
+}
 </script>
 
 <template>
   <h2>New Hero</h2>
 
-  <form>
+  <form @submit.prevent="handleForm">
     <label for="">
       Name
       <input
