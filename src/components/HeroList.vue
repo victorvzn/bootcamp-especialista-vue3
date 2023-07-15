@@ -81,7 +81,7 @@ const handleShowModal = (imageUrl) => {
     v-model="query"
     @keyup="emit('onSearch', query)"
   />
-  
+
   <table role="grid">
     <thead>
       <tr>

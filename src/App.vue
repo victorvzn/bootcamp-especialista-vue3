@@ -9,13 +9,16 @@ import { fetchHeroes } from './services/heroes'
 
 const heroes = ref([])
 
+const query = ref('')
+
 const handlePage = async (value) => {
   // console.log(value)
-  heroes.value = await fetchHeroes({ page: value, limit: 4 })
+  heroes.value = await fetchHeroes({ page: value, limit: 4, name: query.value })
 }
 
 const hadleSearchByName = async (name) => {
-  console.log({ name })
+  // console.log({ name })
+  query.value = name
   heroes.value = await fetchHeroes({ page: 1, limit: 4, name })
 }
 
@@ -30,7 +33,8 @@ onBeforeMount(async () => heroes.value = await fetchHeroes())
       title="Super Heroes"
     />
 
-    <HeroList :heroes="heroes" @onPage="handlePage" @onSearch="hadleSearchByName" />
+    <HeroList
+      :heroes="heroes" @onPage="handlePage" @onSearch="hadleSearchByName" />
   </main>
 </template>
 
