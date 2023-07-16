@@ -32,6 +32,12 @@ const handleFilterByGender = async (gender) => {
   heroes.value = await fetchHeroes({ page: page.value, limit: 4, name: query.value, gender })
 }
 
+const handleRefresh = async (page) => {
+  heroes.value = await fetchHeroes({
+    page, limit: 4, name: query.value, gender: genderFilter.value
+  })
+}
+
 onBeforeMount(async () => {
   heroes.value = await fetchHeroes()
 })
@@ -52,6 +58,7 @@ onBeforeMount(async () => {
           @onPage="handlePage"
           @onSearch="hadleSearchByName"
           @onFilter="handleFilterByGender"
+          @onRefresh="handleRefresh"
         />
       </div>
       <div>

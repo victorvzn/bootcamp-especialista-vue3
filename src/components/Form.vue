@@ -35,7 +35,7 @@ const handleForm = async (event) => {
 
     console.log(res)
 
-    // TODO: Validar la respuesta y mostrar un mensaje de exito o de error
+    // DONE: Validar la respuesta y mostrar un mensaje de exito o de error
 
     if (res) {
       toaster.success(`Se guardó correctamente`);

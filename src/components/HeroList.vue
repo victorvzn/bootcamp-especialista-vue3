@@ -8,6 +8,9 @@ import ModalBase from '@/components/shared/ModalBase.vue'
 
 import { deleteHero } from '@/services/heroes.js'
 
+import { createToaster } from "@meforma/vue-toaster"
+
+const toaster = createToaster()
 
 const page = ref(1)
 const limit = ref(4)
@@ -34,7 +37,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPage', 'onSearch', 'onFilter'])
+const emit = defineEmits(['onPage', 'onSearch', 'onFilter', 'onRefresh'])
 
 const firstPage = () => {
   if (page.value === 1) return
@@ -78,14 +81,23 @@ const handleShowModal = (imageUrl) => {
 }
 
 const handleRemoveHero = async (hero) => {
-  // operaciones sobre el api con el metodo DELETE
-  console.log(hero)
+  try {
+    // operaciones sobre el api con el metodo DELETE
+    const res = await deleteHero({ id: hero.id })
 
-  const res = await deleteHero({ id: hero.id })
+    // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
 
-  console.log(res)
+    if (res) {
+      toaster.success(`Se eliminó correctamente`);
 
-  // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
+      emit('onRefresh', page.value)
+    }
+
+  } catch (error) {
+    console.log(error)
+    
+    toaster.error(`Hubo un error, intentalo denuevo más tarde`);
+  }
 }
 
 const handleUpdateHero = async (hero) => {
