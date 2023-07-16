@@ -1,5 +1,5 @@
 <template>
-  <nav class="container">
+  <nav class="container-fluid">
     <ul>
       <li>
         <strong>Listado de Heroes con Vue 3</strong>

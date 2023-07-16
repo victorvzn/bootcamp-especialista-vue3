@@ -5,6 +5,7 @@ import IconGenderMale from '../components/icons/otro/IconGenderMale.vue'
 import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
 
 import ModalBase from '@/components/shared/ModalBase.vue'
+import Pagination from '@/components/shared/Pagination.vue'
 
 import { deleteHero } from '@/services/heroes.js'
 
@@ -17,8 +18,6 @@ const limit = ref(4)
 const count = ref(75)
 const isOpenModal = ref(false)
 const selectedHero = ref(null)
-const query = ref('')
-const filterByGender = ref('')
 
 // Vue 2
 // export default { 
@@ -31,6 +30,10 @@ const filterByGender = ref('')
 // }
 
 defineProps({
+  currentPage: {
+    type: Number,
+    default: 1
+  },
   heroes: {
     type: Array,
     required: true
@@ -38,42 +41,6 @@ defineProps({
 })
 
 const emit = defineEmits(['onPage', 'onSearch', 'onFilter', 'onRefresh', 'onUpdateHero'])
-
-const firstPage = () => {
-  if (page.value === 1) return
-
-  page.value = 1
-  
-  emit('onPage', page.value)
-}
-
-const nextPage = () => {
-  const lastPage = Math.ceil(count.value / limit.value)
-
-  if (page.value >= lastPage) return
-
-  page.value = page.value + 1
-  
-  emit('onPage', page.value)
-}
-
-const prevPage = () => {
-  if (page.value === 1) return
-
-  page.value = page.value - 1
-  
-  emit('onPage', page.value)
-}
-
-const lastPage = () => {
-  const lastPage = Math.ceil(count.value / limit.value) // 100 / 4 = 25 pages
-
-  if (page.value === lastPage) return
-
-  page.value = lastPage
-
-  emit('onPage', page.value)
-}
 
 const handleShowModal = (imageUrl) => {
   isOpenModal.value = !isOpenModal.value
@@ -100,6 +67,10 @@ const handleRemoveHero = async (hero) => {
   }
 }
 
+const handleOnPage = (page) => {
+  emit('onPage', page)
+}
+
 const handleUpdateHero = async (hero) => {
   // DONE: Ejecutar la accion para actualizar un registro
   // DONE: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
@@ -109,27 +80,8 @@ const handleUpdateHero = async (hero) => {
 </script>
 
 <template>
-  <div class="grid">
-    <div>
-      <input
-        type="text"
-        placeholder="Search by name"
-        v-model="query"
-        @keyup="emit('onSearch', query)"
-      />
-    </div>
-    <div>
-      <select v-model="filterByGender" @change="emit('onFilter', filterByGender)">
-        <option value="" selected>Select a gender…</option>
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-        <option value="0">Other</option>
-      </select>
-    </div>
-  </div>
-
   <table role="grid">
-    <thead>
+    <thead> 
       <tr>
         <th>#</th>
         <th>Image</th>
@@ -169,13 +121,14 @@ const handleUpdateHero = async (hero) => {
     </tbody>
   </table>
 
-  <div class="pagination">
-    <button @click="firstPage">First</button>
-    <button @click="prevPage">Previous</button>
-    <button disabled class="contrast outline">{{ page }} of {{ Math.ceil(count / limit) }}</button>
-    <button @click="nextPage">Next</button>
-    <button @click="lastPage">Last</button>
-  </div>
+  {{ page }}
+
+  <Pagination
+    :page="currentPage"
+    :count="count.value"
+    :limit="limit.value"
+    @onPage="handleOnPage"
+  />
 
   <ModalBase
     :title="`Selected hero ${selectedHero?.name}`"
