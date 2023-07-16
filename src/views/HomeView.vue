@@ -2,7 +2,7 @@
 import { ref, onBeforeMount } from 'vue'
 
 import Heading from '@/components/Heading.vue'
-import HeroList from '@/components/HeroList.vue'
+import HeroList from '@/components/hero-list/HeroList.vue'
 import Form from '@/components/Form.vue'
 
 import HeroFilter from '@/components/HeroFilter.vue'
@@ -59,13 +59,13 @@ onBeforeMount(async () => {
     title="Super Heroes"
   />
 
+  <HeroFilter
+    @onSearch="hadleSearchByName"
+    @onFilter="handleFilterByGender"
+  />
+
   <div class="grid">
     <div>
-      <HeroFilter
-        @onSearch="hadleSearchByName"
-        @onFilter="handleFilterByGender"
-      />
-
       <HeroList
         :currentPage="page"
         :heroes="heroes"

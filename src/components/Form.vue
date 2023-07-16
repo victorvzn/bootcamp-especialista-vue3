@@ -101,10 +101,8 @@ const handleForm = async (event) => {
 </script>
 
 <template>
+  <!-- TODO: Hacer que los componentes del formulario y cualquier parte de la app (input, select, buttons) sean reutilizables usando @input, $attrs. Tal como está en los videos del Canvas. Ejemplo: <BaseInput />, <BaseSelect />, <BaseButton />, etc -->
   <h2>New Hero</h2>
-
-  <pre>{{ hero }}</pre>
-
   <form @submit.prevent="handleForm">
     <label for="">
       Name
@@ -139,5 +137,6 @@ const handleForm = async (event) => {
     </label>
     <button type="submit">Save</button>
 
+    <pre>{{ hero }}</pre>
   </form>
 </template>

@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import IconGenderMale from '../components/icons/otro/IconGenderMale.vue'
+import IconGenderMale from '@/components/icons/otro/IconGenderMale.vue'
 import IconGenderFemale from '@/components/icons/IconGenderFemale.vue'
-
 import ModalBase from '@/components/shared/ModalBase.vue'
-import Pagination from '@/components/shared/Pagination.vue'
 
 import { deleteHero } from '@/services/heroes.js'
 
@@ -13,24 +11,11 @@ import { createToaster } from "@meforma/vue-toaster"
 
 const toaster = createToaster()
 
-const page = ref(1)
-const limit = ref(4)
-const count = ref(75)
 const isOpenModal = ref(false)
 const selectedHero = ref(null)
 
-// Vue 2
-// export default { 
-//   props: {
-//     heroes: {
-//       type: String,
-//       required: true
-//     }
-//   }
-// }
-
-defineProps({
-  currentPage: {
+const props = defineProps({
+  page: {
     type: Number,
     default: 1
   },
@@ -40,7 +25,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPage', 'onSearch', 'onFilter', 'onRefresh', 'onUpdateHero'])
+const emit = defineEmits(['onRefresh', 'onUpdateHero'])
 
 const handleShowModal = (imageUrl) => {
   isOpenModal.value = !isOpenModal.value
@@ -57,7 +42,7 @@ const handleRemoveHero = async (hero) => {
     if (res) {
       toaster.success(`Se eliminó correctamente`);
 
-      emit('onRefresh', page.value)
+      emit('onRefresh', props.page)
     }
 
   } catch (error) {
@@ -67,9 +52,6 @@ const handleRemoveHero = async (hero) => {
   }
 }
 
-const handleOnPage = (page) => {
-  emit('onPage', page)
-}
 
 const handleUpdateHero = async (hero) => {
   // DONE: Ejecutar la accion para actualizar un registro
@@ -121,15 +103,6 @@ const handleUpdateHero = async (hero) => {
     </tbody>
   </table>
 
-  {{ page }}
-
-  <Pagination
-    :page="currentPage"
-    :count="count.value"
-    :limit="limit.value"
-    @onPage="handleOnPage"
-  />
-
   <ModalBase
     :title="`Selected hero ${selectedHero?.name}`"
     :open="isOpenModal"
@@ -137,24 +110,3 @@ const handleUpdateHero = async (hero) => {
     <img :src="selectedHero?.image_screen_large_url" />
   </ModalBase>
 </template>
-
-<style scoped>
-.gender--male {
-  fill: #60a5fa;
-}
-.gender--female {
-  fill: #fb7185;
-}
-.gender--none {
-  fill: #d7ef1c;
-}
-
-.pagination {
-  display: flex;
-  gap: 1rem;
-}
-
-.pagination div {
-  width: 100px;
-}
-</style>
