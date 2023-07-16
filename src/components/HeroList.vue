@@ -37,7 +37,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['onPage', 'onSearch', 'onFilter', 'onRefresh'])
+const emit = defineEmits(['onPage', 'onSearch', 'onFilter', 'onRefresh', 'onUpdateHero'])
 
 const firstPage = () => {
   if (page.value === 1) return
@@ -85,7 +85,7 @@ const handleRemoveHero = async (hero) => {
     // operaciones sobre el api con el metodo DELETE
     const res = await deleteHero({ id: hero.id })
 
-    // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
+    // DONE: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
 
     if (res) {
       toaster.success(`Se eliminó correctamente`);
@@ -101,9 +101,10 @@ const handleRemoveHero = async (hero) => {
 }
 
 const handleUpdateHero = async (hero) => {
-  
-  // TODO: Ejecutar la accion para actualizar un registro
-  // TODO: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
+  // DONE: Ejecutar la accion para actualizar un registro
+  // DONE: Validar la respuesta del servidor y mostrar un mensaje de exito o de error
+
+  emit('onUpdateHero', hero)
 }
 </script>
 

@@ -28,7 +28,23 @@ export const createHero = async ({ form }) => {
 
   const data = await response.json()
 
-  console.log({ data, form })
+  return data
+}
+
+export const updateHero = async ({ form }) => {
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  }
+
+  const id = form.id
+
+  const response = await fetch(`${BASE_URL}/heroes2/${id}`, options)
+
+  const data = await response.json()
 
   return data
 }

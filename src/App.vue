@@ -13,6 +13,7 @@ const heroes = ref([])
 const query = ref('')
 const genderFilter = ref('')
 const page = ref(1)
+const heroSelected = ref(null)
 
 const handlePage = async (value) => {
   // console.log(value)
@@ -38,6 +39,10 @@ const handleRefresh = async (page) => {
   })
 }
 
+const handleUpdateHero = async (hero) => {
+  heroSelected.value = hero
+}
+
 onBeforeMount(async () => {
   heroes.value = await fetchHeroes()
 })
@@ -59,10 +64,11 @@ onBeforeMount(async () => {
           @onSearch="hadleSearchByName"
           @onFilter="handleFilterByGender"
           @onRefresh="handleRefresh"
+          @onUpdateHero="handleUpdateHero"
         />
       </div>
       <div>
-        <Form />
+        <Form :hero="heroSelected" />
       </div>
     </div>
 
