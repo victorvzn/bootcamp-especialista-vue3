@@ -4,7 +4,11 @@ export const fetchHeroes = async (
   { page, limit, name, gender } = { page: 1, limit: 4, name: '', gender: '' }
 ) => {
 
-  const response = await fetch(`${BASE_URL}/heroes2?page=${page}&limit=${limit}&gender=${gender}`)
+  const params = `page=${page}&limit=${limit}&name=${name}&gender=${gender}`
+
+  const url = `${BASE_URL}/heroes2?${params}`
+
+  const response = await fetch(url)
 
   const data = await response.json()
 

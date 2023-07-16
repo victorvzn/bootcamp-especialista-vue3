@@ -21,9 +21,9 @@ const handlePage = async (value) => {
 }
 
 const hadleSearchByName = async (name) => {
-  // console.log({ name })
+  console.log({ name })
   query.value = name
-  heroes.value = await fetchHeroes({ page: 1, limit: 4, name })
+  heroes.value = await fetchHeroes({ page: 1, limit: 4, name, gender: genderFilter.value })
 }
 
 const handleFilterByGender = async (gender) => {
@@ -32,7 +32,9 @@ const handleFilterByGender = async (gender) => {
   heroes.value = await fetchHeroes({ page: page.value, limit: 4, name: query.value, gender })
 }
 
-onBeforeMount(async () => heroes.value = await fetchHeroes())
+onBeforeMount(async () => {
+  heroes.value = await fetchHeroes()
+})
 </script>
 
 <template>
