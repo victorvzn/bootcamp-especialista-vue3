@@ -43,6 +43,12 @@ const handleUpdateHero = async (hero) => {
   heroSelected.value = hero
 }
 
+const handleRefreshAfterUpdate = async () => {
+  heroes.value = await fetchHeroes({
+    page: page.value, limit: 4, name: query.value, gender: genderFilter.value
+  })
+}
+
 onBeforeMount(async () => {
   heroes.value = await fetchHeroes()
 })
@@ -68,7 +74,7 @@ onBeforeMount(async () => {
         />
       </div>
       <div>
-        <Form :hero="heroSelected" />
+        <Form :hero="heroSelected" @onRefreshAfterUpdate="handleRefreshAfterUpdate" />
       </div>
     </div>
 

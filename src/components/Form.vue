@@ -13,6 +13,8 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['onRefreshAfterUpdate'])
+
 watch(() => props.hero, (newHero, oldHero) => {
   console.log(newHero, oldHero)
 
@@ -71,6 +73,22 @@ const handleForm = async (event) => {
       if (res) {
         toaster.success(`Se actualizó el heroe correctamente`);
       }
+
+      emit('onRefreshAfterUpdate')
+    }
+
+    formData.value = {
+      id: '',
+
+      name: '',
+      realName: '',
+      gender: '',
+      birth: '',
+
+      aliases: 'aliases',
+      deck: 'deck description',
+      image_screen_large_url: 'url_large',
+      image_screen_url: 'url'
     }
 
     // DONE: Validar la respuesta y mostrar un mensaje de exito o de error
