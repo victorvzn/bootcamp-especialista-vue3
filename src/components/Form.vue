@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { createHero } from '@/services/heroes';
+import { createHero } from '@/services/heroes'
+
+import { createToaster } from "@meforma/vue-toaster"
+
+const toaster = createToaster()
 
 const formData = ref({
   name: '',
@@ -15,21 +19,33 @@ const formData = ref({
 })
 
 const handleForm = async (event) => {
-  const newHero = formData.value
+  try {
 
-  newHero.gender = Number(newHero.gender)
+    const newHero = formData.value
 
-  newHero['real_name'] = newHero.realName
+    newHero.gender = Number(newHero.gender)
 
-  delete newHero.realName
+    newHero['real_name'] = newHero.realName
 
-  console.log(newHero)
-  
-  const res = await createHero({ form: newHero })
+    delete newHero.realName
 
-  console.log(res)
+    console.log(newHero)
+    
+    const res = await createHero({ form: newHero })
 
-  // TODO: Validar la respuesta y mostrar un mensaje de exito o de error
+    console.log(res)
+
+    // TODO: Validar la respuesta y mostrar un mensaje de exito o de error
+
+    if (res) {
+      toaster.success(`Se guardó correctamente`);
+    }
+  } catch (error) {
+    console.log(error)
+    
+    toaster.error(`Hubo un error, intentalo denuevo más tarde`);
+  }
+
 }
 </script>
 
