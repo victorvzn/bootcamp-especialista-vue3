@@ -4,6 +4,9 @@ import { createHero, updateHero } from '@/services/heroes'
 
 import { createToaster } from "@meforma/vue-toaster"
 
+import BaseButton from '@/components/shared/BaseButton.vue';
+import BaseInput from '@/components/shared/BaseInput.vue';
+
 const toaster = createToaster()
 
 const props = defineProps({
@@ -104,12 +107,17 @@ const handleForm = async (event) => {
   <!-- TODO: Hacer que los componentes del formulario y cualquier parte de la app (input, select, buttons) sean reutilizables usando @input, $attrs. Tal como está en los videos del Canvas. Ejemplo: <BaseInput />, <BaseSelect />, <BaseButton />, etc -->
   <h2>New Hero</h2>
   <form @submit.prevent="handleForm">
+    {{ formData }}
     <label for="">
       Name
       <input
         type="text"
         placeholder="Ex. Spiderman"
         required
+        v-model="formData.name"
+      />
+      <BaseInput
+        label="Name"
         v-model="formData.name"
       />
     </label>
@@ -135,7 +143,8 @@ const handleForm = async (event) => {
       Birth
       <input type="date" v-model="formData.birth" />
     </label>
-    <button type="submit">Save</button>
+    
+    <BaseButton label="Save" type="submit" />
 
     <pre>{{ hero }}</pre>
   </form>
