@@ -108,28 +108,20 @@ const handleForm = async (event) => {
   <h2>New Hero</h2>
   <form @submit.prevent="handleForm">
     {{ formData }}
-    <label for="">
-      Name
-      <input
-        type="text"
-        placeholder="Ex. Spiderman"
-        required
-        v-model="formData.name"
-      />
-      <BaseInput
-        label="Name"
-        v-model="formData.name"
-      />
-    </label>
-    <label for="">
-      Real Name
-      <input
-        type="text"
-        placeholder="Ex. Spiderman"
-        required
-        v-model="formData.realName"
-      />
-    </label>
+    <BaseInput
+      label="Name"
+      placeholder="Ex. Ironman"
+      required
+      v-model="formData.name"
+    />
+
+    <BaseInput
+      label="Real Name"
+      placeholder="Ex. Spiderman"
+      required
+      v-model="formData.realName"
+    />
+
     <label for="">
       Gender
       <select v-model="formData.gender">
@@ -139,10 +131,13 @@ const handleForm = async (event) => {
         <option value="0">Other</option>
       </select>
     </label>
-    <label>
-      Birth
-      <input type="date" v-model="formData.birth" />
-    </label>
+
+    <BaseInput
+      label="Birth"
+      type="date"
+      required
+      v-model="formData.birth"
+    />
     
     <BaseButton label="Save" type="submit" />
 
