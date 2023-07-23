@@ -6,6 +6,7 @@ import { createToaster } from "@meforma/vue-toaster"
 
 import BaseButton from '@/components/shared/BaseButton.vue';
 import BaseInput from '@/components/shared/BaseInput.vue';
+import BaseSelect from '@/components/shared/BaseSelect.vue';
 
 const toaster = createToaster()
 
@@ -43,6 +44,21 @@ const formData = ref({
   image_screen_large_url: 'url_large',
   image_screen_url: 'url'
 })
+
+const genderOptions = ref([
+  {
+    label: 'Male',
+    value: 1
+  },
+  {
+    label: 'Female',
+    value: 2
+  },
+  {
+    label: 'Other',
+    value: 0
+  }
+])
 
 const handleForm = async (event) => {
   // TODO: Limpiar el formulario después de crear o actualizar
@@ -107,7 +123,6 @@ const handleForm = async (event) => {
   <!-- TODO: Hacer que los componentes del formulario y cualquier parte de la app (input, select, buttons) sean reutilizables usando @input, $attrs. Tal como está en los videos del Canvas. Ejemplo: <BaseInput />, <BaseSelect />, <BaseButton />, etc -->
   <h2>New Hero</h2>
   <form @submit.prevent="handleForm">
-    {{ formData }}
     <BaseInput
       label="Name"
       placeholder="Ex. Ironman"
@@ -122,15 +137,11 @@ const handleForm = async (event) => {
       v-model="formData.realName"
     />
 
-    <label for="">
-      Gender
-      <select v-model="formData.gender">
-        <option value="">Select a gender...</option>
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-        <option value="0">Other</option>
-      </select>
-    </label>
+    <BaseSelect
+      label="Gender"
+      v-model="formData.gender"
+      :options="genderOptions"
+    />
 
     <BaseInput
       label="Birth"
