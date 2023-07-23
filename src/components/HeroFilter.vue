@@ -34,17 +34,6 @@
       />
     </div>
     <div>
-      {{ filterByGender }}
-      <select
-        v-model="filterByGender"
-        @change="emit('onFilter', filterByGender)"
-      >
-        <option value="" selected>Select a gender…</option>
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-        <option value="0">Other</option>
-      </select>
-
       <BaseSelect
         label=""
         v-model="filterByGender"
