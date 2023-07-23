@@ -4,7 +4,10 @@ export const fetchHeroes = async (
   { page, limit, name, gender } = { page: 1, limit: 4, name: '', gender: '' }
 ) => {
 
-  const params = `page=${page}&limit=${limit}&name=${name}&gender=${gender}`
+  const nameParam = name ? `&name=${name}` : ''
+  const genderParam = gender ? `&gender=${gender}` : ''
+
+  const params = `page=${page}&limit=${limit}${nameParam}${genderParam}`
 
   const url = `${BASE_URL}/heroes2?${params}`
 

@@ -28,8 +28,8 @@ const hadleSearchByName = async (name) => {
 }
 
 const handleFilterByGender = async (gender) => {
-  console.log(gender)
   genderFilter.value = gender
+  console.log(genderFilter.value)
   heroes.value = await fetchHeroes({ page: page.value, limit: 4, name: query.value, gender })
 }
 

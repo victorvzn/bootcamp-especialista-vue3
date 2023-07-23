@@ -24,7 +24,7 @@ defineProps({
     {{ label }}
     <select
       v-bind="$attrs"
-      @change="$emit('update:modelValue', $event.target.value)"
+      @onChange="$emit('update:modelValue', $event.target.value)"
     >
       <option value="">Select a {{ label }}...</option>
       <option
