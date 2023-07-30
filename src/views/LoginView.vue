@@ -26,9 +26,13 @@ const handleLogin = async (event) => {
     const data = await response.json()
 
     if (response.ok && data.length === 1) {
+      localStorage.setItem('auth', true)
+
       router.push({ name: 'home' })
       
       toaster.success('Login ok!')
+    } else {
+      toaster.warning('Login unsuccessfull!')
     }
   } catch(err) {
     console.error(err)
