@@ -1,3 +1,24 @@
+<script setup>
+import { ref } from 'vue'
+
+const form = ref({
+  fullname: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+})
+
+const handleRegister = (event) => {
+  event.preventDefault();
+  
+  const { fullname, email, password, confirmPassword } = form.value
+
+  
+
+  console.log(form.value)
+}
+</script>
+
 <template>
   <div class="container">
 
@@ -9,13 +30,16 @@
           <h2>Ingresa tus datos para registrarte</h2>
         </hgroup>
 
-        <form>
+        {{ form }}
+
+        <form @submit="handleRegister">
           <BaseInput
             label="Fullname"
             type="text"
             name="fullname"
             placeholder="Fullname"
             required
+            v-model="form.fullname"
           />
 
           <BaseInput
@@ -24,6 +48,7 @@
             name="email"
             placeholder="Email"
             required
+            v-model="form.email"
           />
           
           <BaseInput
@@ -32,6 +57,16 @@
             name="password"
             placeholder="Password"
             required
+            v-model="form.password"
+          />
+
+          <BaseInput
+            label="Confirm Password"
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            required
+            v-model="form.confirmPassword"
           />
 
           <BaseButton
