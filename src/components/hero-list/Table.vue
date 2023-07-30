@@ -96,8 +96,11 @@ const handleUpdateHero = async (hero) => {
           <span v-else>-</span>
         </th>
         <th>
-          <button role="button" @click="handleRemoveHero(hero)">❌</button>
-          <button role="button" @click="handleUpdateHero(hero)">✏</button>
+          <div class="actions">
+            <RouterLink :to="{ name: 'heroes-detail', params: { id: hero.id } }" role="button">👁</RouterLink>
+            <button role="button" @click="handleRemoveHero(hero)">❌</button>
+            <button role="button" @click="handleUpdateHero(hero)">✏</button>
+          </div>
         </th>
       </tr>
     </tbody>
@@ -110,3 +113,11 @@ const handleUpdateHero = async (hero) => {
     <img :src="selectedHero?.image_screen_large_url" />
   </ModalBase>
 </template>
+
+<style scoped>
+.actions {
+  display: flex;
+  align-items: start;
+  gap: .5rem;
+}
+</style>

@@ -21,19 +21,19 @@
     </ul>
 
     <ul>
-      <li v-if="isAuthenticated()">
+      <li v-if="isAuthenticated">
         <RouterLink to="/">Home</RouterLink>
       </li>
-      <li v-if="!isAuthenticated()">
+      <li v-if="!isAuthenticated">
         <RouterLink to="/login">Login</RouterLink>
       </li>
-      <li v-if="!isAuthenticated()">
+      <li v-if="!isAuthenticated">
         <RouterLink to="/register">Register</RouterLink>
       </li>
-      <li v-if="!isAuthenticated()">
+      <li v-if="!isAuthenticated">
         <RouterLink :to="{ name: 'about' }">About</RouterLink>
       </li>
-      <li v-if="isAuthenticated()">
+      <li v-if="isAuthenticated">
         <button @click="handleLogout">Logout</button>
       </li>
     </ul>
