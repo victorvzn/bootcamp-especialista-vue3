@@ -1,6 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 
+import { createToaster } from "@meforma/vue-toaster"
+import { useRouter } from 'vue-router'
+
+import { registerUser } from '@/services/auth.js'
+
+const toaster = createToaster()
+
+const router = useRouter()
+
 const form = ref({
   fullname: '',
   email: '',
@@ -13,7 +22,19 @@ const handleRegister = (event) => {
   
   const { fullname, email, password, confirmPassword } = form.value
 
-  
+  registerUser({ fullname, email, password })
+    .then(response => {
+      if (response.ok) {
+        // router.push('/login')
+        router.push({ name: 'login' })
+
+        toaster.success('User saved successfully!')
+      }
+    })
+    .catch(err => {
+      console.error(err)
+      toaster.error('Something is wrong!')
+    })
 
   console.log(form.value)
 }

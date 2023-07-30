@@ -1,6 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_URL
 
-export const registerUser = async ({ form }) => {
+export const registerUser = async (form) => {
+  console.log(form)
   const options = {
     method: 'POST',
     headers: {
@@ -9,9 +10,9 @@ export const registerUser = async ({ form }) => {
     body: JSON.stringify(form)
   }
 
-  const response = await fetch(`${BASE_URL}/heroes2`, options)
+  const response = await fetch(`${BASE_URL}/users`, options)
 
-  const data = await response.json()
+  // const data = await response.json()
 
-  return data
+  return response
 }
