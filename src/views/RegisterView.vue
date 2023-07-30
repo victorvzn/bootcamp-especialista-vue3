@@ -34,6 +34,8 @@ const handleRegister = (event) => {
     .catch(err => {
       console.error(err)
       toaster.error('Something is wrong!')
+
+      router.push({ name: 'login' })
     })
 
   console.log(form.value)
