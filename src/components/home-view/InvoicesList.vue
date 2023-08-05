@@ -1,4 +1,6 @@
 <script setup>
+  import { RouterLink } from 'vue-router'
+
   import { useInvoicesStore } from '@/stores/invoices'
 
   import { formatNumber } from '@/utils'
@@ -31,7 +33,7 @@
           class="py-1 rounded-md text-center font-bold min-w-[50px] bg-emerald-400/20 text-emerald-400 flex justify-center items-center gap-1"
           v-if="invoice.status === 'paid'"
         >
-          <span class="text-3xl">•</span>
+          <span class="">•</span>
           {{ invoice.status }}
         </div>
         <div
@@ -50,7 +52,9 @@
         </div>
       </div>
       <div class="w-5 text-right cursor-pointer">
-        <font-awesome-icon icon="fa-solid fa-chevron-right" />
+        <RouterLink :to="{ name: 'invoice-detail', params: { id: invoice.id } }">
+          <font-awesome-icon icon="fa-solid fa-chevron-right" />
+        </RouterLink>
       </div>
     </article>
   </div>

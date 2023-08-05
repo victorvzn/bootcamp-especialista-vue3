@@ -8,10 +8,12 @@
       <span class="text-sm">There are 7 total invoices</span>
     </div>
 
-    <button
-      class="bg-[#7c5df9] rounded-full px-5 py-3 font-semibold text-white"
-    >
-      New Invoice
-    </button>
+    <RouterLink :to="{ name: 'invoice-new' }">
+      <button
+        class="bg-[#7c5df9] rounded-full px-5 py-3 font-semibold text-white"
+      >
+        New Invoice
+      </button>
+    </RouterLink>
   </header>
 </template>
