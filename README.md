@@ -1,14 +1,33 @@
-# Repositorio: Bootcamp Especialista Vue 3 de Codigo G01
+# Semana 05, día01, Vue + Pinia, Invoice APP
 
 <p align="center">
   <img src="https://assets.website-files.com/624b2bd5b7be89e20392d489/624e1be85a96e3ac3e45f7fb_logo-color-go.svg" />
 </p>
 
-Este será el repositorio del bootcamp Especialista Vue3.
+This template should help get you started developing with Vue 3 in Vite.
 
-Las semanas y los días estarán distribuidas por _branches_(ramas) en la cual cada semana y día será una _branch_.
+## Recommended IDE Setup
 
-A continuación, las semanas:
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-- Semana 01, Día 01 - CRUD de Empresas
-- Semana 01, Día 02 - Listado de heroes con paginación
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
