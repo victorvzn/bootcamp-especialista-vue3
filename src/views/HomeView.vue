@@ -1,4 +1,13 @@
 <script setup>
+  import { onBeforeMount } from 'vue'
+
+  import { useInvoicesStore } from '@/stores/invoices'
+
+  const { fetchAll, getInvoices } = useInvoicesStore()
+
+  onBeforeMount(async () => {
+    await fetchAll()
+  })
 </script>
 
 <template>
@@ -15,9 +24,12 @@
     </button>
   </header>
 
-  <main class="w-[940px] bg-red-300 mx-auto">
-    <article class="bg-[#1f213a]">
-      
+  <main class="w-[940px] mx-auto flex flex-col gap-5">
+    <article
+      class="bg-[#1f213a] text-white"
+      v-for="invoice in getInvoices()"
+    >
+      {{ invoice.code }}
     </article>
   </main>
 </template>
