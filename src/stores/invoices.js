@@ -10,6 +10,9 @@ export const useInvoicesStore = defineStore({
   getters: {
     getInvoices: (state) => () => {
       return state.invoices
+    },
+    getTotalInvoices: (state) => () => {
+      return state.invoices.length
     }
   },
   actions: {

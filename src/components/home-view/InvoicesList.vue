@@ -30,25 +30,25 @@
       </div>
       <div class="w-40 capitalize">
         <div
-          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-emerald-400/20 text-emerald-400 flex justify-center items-center gap-1"
+          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-emerald-400/20 text-emerald-400 flex justify-center items-center gap-1 text-3xl"
           v-if="invoice.status === 'paid'"
         >
-          <span class="">•</span>
-          {{ invoice.status }}
+          <span>•</span>
+          <span class="text-base">{{ invoice.status }}</span>
         </div>
         <div
-          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-orange-400/20 text-orange-400 flex justify-center items-center gap-1"
+          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-orange-400/20 text-orange-400 flex justify-center items-center gap-1 text-3xl"
           v-if="invoice.status === 'pending'"
         >
-          <span class="text-3xl">•</span>
-          {{ invoice.status }}
+          <span>•</span>
+          <span class="text-base">{{ invoice.status }}</span>
         </div>
         <div
-          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-slate-400/20 text-slate-400 flex justify-center items-center gap-1"
+          class="py-1 rounded-md text-center font-bold min-w-[50px] bg-slate-400/20 text-slate-400 flex justify-center items-center gap-1  text-3xl"
           v-if="invoice.status === 'draft'"
         >
-          <span class="text-3xl">•</span>
-          {{ invoice.status }}
+          <span>•</span>
+          <span class="text-base">{{ invoice.status }}</span>
         </div>
       </div>
       <div class="w-5 text-right cursor-pointer">
