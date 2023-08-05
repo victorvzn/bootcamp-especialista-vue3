@@ -14,7 +14,7 @@
 <template>
   <HomeViewHeader />
 
-  <main class="w-[940px] mx-auto flex flex-col gap-5">
+  <main class="w-[940px] mx-auto">
     <InvoiceList />
   </main>
 </template>
