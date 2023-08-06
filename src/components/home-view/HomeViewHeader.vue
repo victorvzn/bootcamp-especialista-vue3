@@ -1,9 +1,9 @@
 <script setup>
 import { useInvoicesStore } from '@/stores/invoices'
 
-import BaseButton from '@/components/shared/BaseButton.vue'
-
 const { getTotalInvoices } = useInvoicesStore()
+
+import BaseButton from '@/components/shared/BaseButton.vue'
 </script>
 
 <template>
@@ -14,7 +14,10 @@ const { getTotalInvoices } = useInvoicesStore()
     </div>
 
     <RouterLink :to="{ name: 'invoice-new' }">
-      <BaseButton />
+      <BaseButton color="[#7c5df9]">
+        <font-awesome-icon icon="fa-solid fa-circle-plus" size="2x" />
+        New Invoice
+      </BaseButton>
     </RouterLink>
   </header>
 </template>
