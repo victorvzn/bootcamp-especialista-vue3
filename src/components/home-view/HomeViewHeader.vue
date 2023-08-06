@@ -10,7 +10,7 @@ import BaseButton from '@/components/shared/BaseButton.vue'
   <header class="w-[940px] mx-auto flex justify-between items-center my-20">
     <div class="text-white">
       <h1 class="text-4xl font-extrabold">Invoices</h1>
-      <span class="text-sm text-lg">There are {{ getTotalInvoices() }} total invoices</span>
+      <span class="text-lg">There are {{ getTotalInvoices() }} total invoices</span>
     </div>
 
     <RouterLink :to="{ name: 'invoice-new' }">
