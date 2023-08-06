@@ -12,7 +12,9 @@ import { RouterLink } from 'vue-router'
     <header class="flex justify-between items-center bg-[#1f213a] py-3 px-8 mt-10 rounded-lg">
       <div class="flex items-center text-white gap-3">
         <h3>Status</h3>
-        <BaseTag>
+        <BaseTag
+          class="bg-emerald-400/20 text-emerald-400"
+        >
           Pending
         </BaseTag>
       </div>

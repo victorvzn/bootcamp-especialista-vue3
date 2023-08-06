@@ -26,7 +26,7 @@ const formFilter = ref({
       />
 
       <RouterLink :to="{ name: 'invoice-new' }">
-        <BaseButton color="[#7c5df9]">
+        <BaseButton class="bg-[#7c5df9]">
           <font-awesome-icon icon="fa-solid fa-circle-plus" size="2x" />
           New Invoice
         </BaseButton>

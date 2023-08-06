@@ -28,22 +28,25 @@ defineProps({
     {{ invoice.invoice.currency.symbol }}
     {{ formatNumber(invoice.invoice.grandTotal) }}
   </div>
-  <div class="w-40 capitalize">
+  <div class="w-40 capitalize flex justify-center">
     <BaseTag
-      color="emerald"
-      v-if="invoice.status === 'paid'">
+      class="bg-emerald-400/20 text-emerald-400"
+      v-if="invoice.status === 'paid'"
+    >
       <font-awesome-icon icon="fa-solid fa-circle" class="text-[0.6rem]" />
       <span class="text-base">{{ invoice.status }}</span>  
     </BaseTag>
     <BaseTag
-      color="orange"
-      v-if="invoice.status === 'pending'">
+      class="bg-orange-400/20 text-orange-400"
+      v-if="invoice.status === 'pending'"
+    >
       <font-awesome-icon icon="fa-solid fa-circle" class="text-[0.6rem]" />
       <span class="text-base">{{ invoice.status }}</span>  
     </BaseTag>
     <BaseTag
-      color="slate"
-      v-if="invoice.status === 'draft'">
+      class="bg-slate-400/20 text-slate-400"
+      v-if="invoice.status === 'draft'"
+    >
       <font-awesome-icon icon="fa-solid fa-circle" class="text-[0.6rem]" />
       <span class="text-base">{{ invoice.status }}</span>  
     </BaseTag>
