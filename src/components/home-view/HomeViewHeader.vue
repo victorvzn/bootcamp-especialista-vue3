@@ -7,12 +7,9 @@ import { useStatusesStore } from '@/stores/statuses'
 const { getTotalInvoices } = useInvoicesStore()
 const { getStatusOptions } = useStatusesStore()
 
-import BaseButton from '@/components/shared/BaseButton.vue'
-import BaseSelect from '@/components/shared/BaseSelect.vue'
-
-const formFilter = {
+const formFilter = ref({
   status: ''
-}
+})
 </script>
 
 <template>
@@ -22,8 +19,11 @@ const formFilter = {
       <span class="text-lg">There are {{ getTotalInvoices() }} total invoices</span>
     </div>
 
-    <div class="flex gap-8">
-      <BaseSelect :options="getStatusOptions()" v-model="formFilter.status" />
+    <div class="flex gap-8 items-center text-white">
+      <BaseSelect
+        :options="getStatusOptions()"
+        v-model="formFilter.status"
+      />
 
       <RouterLink :to="{ name: 'invoice-new' }">
         <BaseButton color="[#7c5df9]">

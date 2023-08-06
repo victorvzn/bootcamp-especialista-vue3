@@ -2,15 +2,15 @@
   "statuses": [
     {
       "id": "d7909551-c573-42c8-894b-4af2c62cae26",
-      "name": "paid"
+      "name": "Paid"
     },
     {
       "id": "a7f8264e-d071-4510-a246-3cf0d82b43fe",
-      "name": "pending"
+      "name": "Pending"
     },
     {
       "id": "2aa412de-10e7-4ffc-a1a5-07b0ee23e8c6",
-      "name": "draft"
+      "name": "Draft"
     }
   ],
   "invoices": [
