@@ -2,11 +2,16 @@ import { defineStore } from "pinia";
 
 import { fetchStatuses } from "@/services/statuses";
 
-export const useStatusesStores = defineStore({
+export const useStatusesStore = defineStore({
   id: 'statuses',
   state: () => ({
     statuses: []
   }),
+  getters: {
+    getStatuses: (state) => () => {
+      return state.statuses
+    }
+  },
   actions: {
     fetchAll() {
       return fetchStatuses()

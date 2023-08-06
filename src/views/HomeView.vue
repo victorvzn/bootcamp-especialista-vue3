@@ -5,11 +5,11 @@
   import InvoiceList from '@/components/home-view/InvoicesList.vue'
 
   import { useInvoicesStore } from '@/stores/invoices'
-  import { useStatusesStores } from '@/stores/statuses'
+  import { useStatusesStore } from '@/stores/statuses'
 
   const { fetchAll } = useInvoicesStore()
 
-  const { fetchAll: fetchAllStatuses } = useStatusesStores()
+  const { fetchAll: fetchAllStatuses } = useStatusesStore()
 
   onBeforeMount(async () => {
     await fetchAllStatuses()

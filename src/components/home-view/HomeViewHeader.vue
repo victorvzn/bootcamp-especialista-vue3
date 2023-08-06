@@ -1,7 +1,9 @@
 <script setup>
 import { useInvoicesStore } from '@/stores/invoices'
+import { useStatusesStore } from '@/stores/statuses'
 
 const { getTotalInvoices } = useInvoicesStore()
+const { getStatuses } = useStatusesStore()
 
 import BaseButton from '@/components/shared/BaseButton.vue'
 </script>
@@ -13,11 +15,22 @@ import BaseButton from '@/components/shared/BaseButton.vue'
       <span class="text-lg">There are {{ getTotalInvoices() }} total invoices</span>
     </div>
 
-    <RouterLink :to="{ name: 'invoice-new' }">
-      <BaseButton color="[#7c5df9]">
-        <font-awesome-icon icon="fa-solid fa-circle-plus" size="2x" />
-        New Invoice
-      </BaseButton>
-    </RouterLink>
+    {{ getStatuses() }}
+
+    <div class="flex gap-8">
+      <select class="bg-transparent text-lg font-bold text-white w-44">
+        <option class="text-slate-800" selected>Filter by status</option>
+        <option class="text-slate-800 capitalize" value="paid">paid</option>
+        <option class="text-slate-800 capitalize" value="pending">pending</option>
+        <option class="text-slate-800 capitalize" value="draft">draft</option>
+      </select>
+
+      <RouterLink :to="{ name: 'invoice-new' }">
+        <BaseButton color="[#7c5df9]">
+          <font-awesome-icon icon="fa-solid fa-circle-plus" size="2x" />
+          New Invoice
+        </BaseButton>
+      </RouterLink>
+    </div>
   </header>
 </template>
