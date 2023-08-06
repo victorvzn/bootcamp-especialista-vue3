@@ -10,6 +10,19 @@ export const useStatusesStore = defineStore({
   getters: {
     getStatuses: (state) => () => {
       return state.statuses
+    },
+    getStatusOptions: (state) => () => {
+      const newStatuses = state.statuses.map(status => ({
+        value: status.id,
+        label: status.name,
+      }))
+
+      const defaultStatus = {
+        value: '',
+        label: 'Filter by status'
+      }
+
+      return [defaultStatus, ...newStatuses]
     }
   },
   actions: {

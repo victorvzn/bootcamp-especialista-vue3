@@ -1,11 +1,18 @@
 <script setup>
+import { ref } from 'vue'
+
 import { useInvoicesStore } from '@/stores/invoices'
 import { useStatusesStore } from '@/stores/statuses'
 
 const { getTotalInvoices } = useInvoicesStore()
-const { getStatuses } = useStatusesStore()
+const { getStatusOptions } = useStatusesStore()
 
 import BaseButton from '@/components/shared/BaseButton.vue'
+import BaseSelect from '@/components/shared/BaseSelect.vue'
+
+const formFilter = {
+  status: ''
+}
 </script>
 
 <template>
@@ -15,15 +22,8 @@ import BaseButton from '@/components/shared/BaseButton.vue'
       <span class="text-lg">There are {{ getTotalInvoices() }} total invoices</span>
     </div>
 
-    {{ getStatuses() }}
-
     <div class="flex gap-8">
-      <select class="bg-transparent text-lg font-bold text-white w-44">
-        <option class="text-slate-800" selected>Filter by status</option>
-        <option class="text-slate-800 capitalize" value="paid">paid</option>
-        <option class="text-slate-800 capitalize" value="pending">pending</option>
-        <option class="text-slate-800 capitalize" value="draft">draft</option>
-      </select>
+      <BaseSelect :options="getStatusOptions()" v-model="formFilter.status" />
 
       <RouterLink :to="{ name: 'invoice-new' }">
         <BaseButton color="[#7c5df9]">
