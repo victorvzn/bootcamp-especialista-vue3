@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 
-import { fetchInvoices } from "../services/invoices";
+import { fetchInvoices, getInvoice } from "../services/invoices";
 
 export const useInvoicesStore = defineStore({
   id: 'invoices',
   state: () => ({
-    invoices: []
+    invoices: [],
+    invoice: null
   }),
   getters: {
     getInvoices: (state) => () => {
@@ -13,6 +14,9 @@ export const useInvoicesStore = defineStore({
     },
     getTotalInvoices: (state) => () => {
       return state.invoices.length
+    },
+    getInvoice: (state) => () => {
+      return state.invoice
     }
   },
   actions: {
@@ -21,6 +25,14 @@ export const useInvoicesStore = defineStore({
         .then(data => {
           console.log(data)
           this.invoices = data
+        })
+        .catch(err => console.log(err))
+    },
+    getOne(id) {
+      return getInvoice(id)
+        .then(data => {
+          console.log(data)
+          this.invoice = data
         })
         .catch(err => console.log(err))
     }

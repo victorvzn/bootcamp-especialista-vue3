@@ -1,9 +1,18 @@
 <script setup>
+import { onBeforeMount } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
+
+import { useInvoicesStore } from '@/stores/invoices'
 
 const route = useRoute()
 
 const { id } = route.params
+
+const { getOne, getInvoice } = useInvoicesStore()
+
+onBeforeMount(async () => {
+  await getOne(id)
+})
 </script>
 
 <template>
@@ -46,6 +55,10 @@ const { id } = route.params
         </BaseButton>
       </div>
     </header>
+
+    <div class="text-white">
+      {{ getInvoice() }}  
+    </div>
 
     <section
       class="flex flex-col justify-between items-center bg-[#1f213a] p-10 mt-5 text-white rounded-lg gap-10"

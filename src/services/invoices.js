@@ -8,3 +8,14 @@ export function fetchInvoices() {
     resolve(invoicesData.invoices)
   })
 }
+
+export function getInvoice(id) {
+  return new Promise((resolve, reject) => {
+    const invoices = invoicesData.invoices
+    const filteredInvoce = invoices.find(invoice => invoice.id === id)
+
+    console.log({filteredInvoce})
+
+    resolve(filteredInvoce)
+  })
+}
