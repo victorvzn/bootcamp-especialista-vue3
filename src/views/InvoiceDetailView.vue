@@ -13,6 +13,8 @@ const { getOne, getInvoice } = useInvoicesStore()
 onBeforeMount(async () => {
   await getOne(id)
 })
+
+// TODO: Renderizar los datos del invoice en esta vista
 </script>
 
 <template>
