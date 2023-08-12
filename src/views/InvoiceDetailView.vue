@@ -4,6 +4,8 @@ import { RouterLink, useRoute } from 'vue-router'
 
 import { useInvoicesStore } from '@/stores/invoices'
 
+import { formatNumber } from '@/utils'
+
 const route = useRoute()
 
 const { id } = route.params
@@ -58,8 +60,6 @@ onBeforeMount(async () => {
       </div>
     </header>
 
-    <pre class="text-white">{{ getInvoice() }}</pre>
-
     <section
       class="flex flex-col justify-between items-center bg-[#1f213a] p-10 mt-5 text-white rounded-lg gap-10"
     >
@@ -89,7 +89,7 @@ onBeforeMount(async () => {
           </div>
         </div>
         <div>
-          <div class="text-lg">Bill to<2/div>
+          <div class="text-lg">Bill to</div>
           <div class="text-xl font-extrabold">{{ getInvoice()?.bill.to.client.name }}</div>
           <div class="text-sm">{{ getInvoice()?.bill.to.streetAddress }}</div>
           <div class="text-sm">{{ getInvoice()?.bill.to.city }}</div>
@@ -112,23 +112,26 @@ onBeforeMount(async () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="p-6 text-xl font-bold">item 1</td>
-            <td class="p-6 text-xl font-bold  text-center w-44">1</td>
-            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
-            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
-          </tr>
-          <tr>
-            <td class="p-6 text-xl font-bold">item 1</td>
-            <td class="p-6 text-xl font-bold text-center w-44">1</td>
-            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
-            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
+          <tr v-for="item in getInvoice()?.invoice.items" :key="item.id">
+            <td class="p-6 text-xl font-bold">{{ item.name }}</td>
+            <td class="p-6 text-xl font-bold  text-center w-44">{{ item.qty }}</td>
+            <td class="p-6 text-xl font-bold text-right w-44">
+              {{ getInvoice()?.invoice.currency.symbol }}
+              {{ formatNumber(item.price) }}
+              </td>
+            <td class="p-6 text-xl font-bold text-right w-44">
+              {{ getInvoice()?.invoice.currency.symbol }}
+              {{ formatNumber(item.total) }}  
+            </td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="bg-[#0b0e16]">
             <td class="p-6" colspan="2">Amount due</td>
-            <td class="p-6 text-4xl font-bold text-right" colspan="2">$ 556.00</td>
+            <td class="p-6 text-4xl font-bold text-right" colspan="2">
+              {{ getInvoice()?.invoice.currency.symbol }}
+              {{ formatNumber(getInvoice()?.invoice.grandTotal) }}
+            </td>
           </tr>
         </tfoot>
       </table>
