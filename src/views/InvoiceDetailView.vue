@@ -48,9 +48,9 @@ const { id } = route.params
     </header>
 
     <section
-      class="flex flex-col justify-between items-center bg-[#1f213a] py-3 px-8 mt-5 text-white rounded-lg"
+      class="flex flex-col justify-between items-center bg-[#1f213a] p-10 mt-5 text-white rounded-lg gap-10"
     >
-      <div class="flex justify-between w-full p-8">
+      <div class="flex justify-between w-full">
         <div class="text-3xl">
           <span class="text-slate-400">#</span>
           <span class="font-extrabold">1F213A</span>
@@ -66,11 +66,61 @@ const { id } = route.params
         </div>
       </div>
 
-      <div class="grid grid-cols-3">
-        <div>col1</div>
-        <div>col2</div>
-        <div>col3</div>
+      <div class="grid grid-cols-3 justify-between w-full">
+        <div class="flex flex-col gap-10">
+          <div>
+            <div class="text-lg">Invoice Date</div>  
+            <div class="text-xl font-extrabold">21 Aug 2021</div>
+          </div>
+          <div>
+            <div class="text-lg">Invoice Date</div>  
+            <div class="text-xl font-extrabold">21 Aug 2021</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-lg">Bill to</div>
+          <div class="text-xl font-extrabold">Alex Grim</div>
+          <div class="text-sm">Line 1</div>
+          <div class="text-sm">Line 2</div>
+          <div class="text-sm">Line 3</div>
+          <div class="text-sm">Line 4</div>
+        </div>
+        <div>
+          <div class="text-lg">Send to</div>
+          <div class="text-xl font-extrabold">alexgrim@mail.com</div>
+        </div>
       </div>
+
+      <table class="bg-[#252945] w-full rounded-lg">
+        <thead>
+          <tr>
+            <td class="p-6">Item Name</td>
+            <td class="p-6 text-center w-44">QTY</td>
+            <td class="p-6 text-right w-44">Price</td>
+            <td class="p-6 text-right w-44">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="p-6 text-xl font-bold">item 1</td>
+            <td class="p-6 text-xl font-bold  text-center w-44">1</td>
+            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
+            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
+          </tr>
+          <tr>
+            <td class="p-6 text-xl font-bold">item 1</td>
+            <td class="p-6 text-xl font-bold text-center w-44">1</td>
+            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
+            <td class="p-6 text-xl font-bold text-right w-44">$ 156.00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="bg-[#0b0e16]">
+            <td class="p-6" colspan="2">Amount due</td>
+            <td class="p-6 text-4xl font-bold text-right" colspan="2">$ 556.00</td>
+          </tr>
+        </tfoot>
+      </table>
       
     </section>
   </main>
