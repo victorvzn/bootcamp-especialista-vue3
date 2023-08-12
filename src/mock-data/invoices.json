@@ -37,10 +37,11 @@
         }
       },
       "invoice": {
-        "date": "21 Aug 2021",
+        "date": "21 Aug 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 1"
         },
         "grandTotal": 556.00,
         "currency": {
@@ -85,10 +86,11 @@
         }
       },
       "invoice": {
-        "date": "19 Aug 2021",
+        "date": "19 Aug 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 2"
         },
         "grandTotal": 1800.90,
         "currency": {
@@ -133,10 +135,11 @@
         }
       },
       "invoice": {
-        "date": "01 Oct 2021",
+        "date": "01 Oct 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 3"
         },
         "grandTotal": 14002.33,
         "currency": {
@@ -181,10 +184,11 @@
         }
       },
       "invoice": {
-        "date": "12 Oct 2021",
+        "date": "12 Oct 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 4"
         },
         "grandTotal": 102.04,
         "currency": {
@@ -229,10 +233,11 @@
         }
       },
       "invoice": {
-        "date": "14 Oct 2021",
+        "date": "14 Oct 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 5"
         },
         "grandTotal": 4032.33,
         "currency": {
@@ -277,10 +282,11 @@
         }
       },
       "invoice": {
-        "date": "12 Nov 2021",
+        "date": "12 Nov 2023",
+        "invoiceDue": "2023-10-12",
         "paymentTerms": "Next 30 Days",
         "project": {
-          "description": "Graphic Design"
+          "description": "Graphic Design 6"
         },
         "grandTotal": 3102.04,
         "currency": {

@@ -58,9 +58,7 @@ onBeforeMount(async () => {
       </div>
     </header>
 
-    <div class="text-white">
-      {{ getInvoice() }}  
-    </div>
+    <pre class="text-white">{{ getInvoice() }}</pre>
 
     <section
       class="flex flex-col justify-between items-center bg-[#1f213a] p-10 mt-5 text-white rounded-lg gap-10"
@@ -68,16 +66,14 @@ onBeforeMount(async () => {
       <div class="flex justify-between w-full">
         <div class="text-3xl">
           <span class="text-slate-400">#</span>
-          <span class="font-extrabold">1F213A</span>
-          <div class="text-xl mt-1">
-            Graphic Design
-          </div>
+          <span class="font-extrabold">{{ getInvoice()?.code }}</span>
+          <div class="text-xl mt-1">{{ getInvoice()?.invoice.project.description }}</div>
         </div>
         <div class="text-sm text-right">
-          <div>line 1</div>  
-          <div>line 2xxxxxxxxxxxxx</div>  
-          <div>line 3</div>  
-          <div>line 4</div>  
+          <div>{{ getInvoice()?.bill.from.streetAddress }}</div>
+          <div>{{ getInvoice()?.bill.from.city }}</div>
+          <div>{{ getInvoice()?.bill.from.postCode }}</div>
+          <div>{{ getInvoice()?.bill.from.country }}</div>
         </div>
       </div>
 
@@ -85,24 +81,24 @@ onBeforeMount(async () => {
         <div class="flex flex-col gap-10">
           <div>
             <div class="text-lg">Invoice Date</div>  
-            <div class="text-xl font-extrabold">21 Aug 2021</div>
+            <div class="text-xl font-extrabold">{{ getInvoice()?.invoice.date }}</div>
           </div>
           <div>
-            <div class="text-lg">Invoice Date</div>  
-            <div class="text-xl font-extrabold">21 Aug 2021</div>
+            <div class="text-lg">Invoice Due</div>  
+            <div class="text-xl font-extrabold">{{ getInvoice()?.invoice.invoiceDue }}</div>
           </div>
         </div>
         <div>
-          <div class="text-lg">Bill to</div>
-          <div class="text-xl font-extrabold">Alex Grim</div>
-          <div class="text-sm">Line 1</div>
-          <div class="text-sm">Line 2</div>
-          <div class="text-sm">Line 3</div>
-          <div class="text-sm">Line 4</div>
+          <div class="text-lg">Bill to<2/div>
+          <div class="text-xl font-extrabold">{{ getInvoice()?.bill.to.client.name }}</div>
+          <div class="text-sm">{{ getInvoice()?.bill.to.streetAddress }}</div>
+          <div class="text-sm">{{ getInvoice()?.bill.to.city }}</div>
+          <div class="text-sm">{{ getInvoice()?.bill.to.postCode }}</div>
+          <div class="text-sm">{{ getInvoice()?.bill.to.country }}</div>
         </div>
         <div>
           <div class="text-lg">Send to</div>
-          <div class="text-xl font-extrabold">alexgrim@mail.com</div>
+          <div class="text-xl font-extrabold">{{ getInvoice()?.bill.to.client.email }}</div>
         </div>
       </div>
 
