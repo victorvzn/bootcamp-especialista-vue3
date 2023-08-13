@@ -1,10 +1,9 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
-import BaseInput from '@/components/shared/BaseInput.vue';
 
-const defaultItems = ref([
-  1, 2
-])
+import ProductItem from '@/components/shared/ProductItem.vue';
+
+const defaultItems = ref([{}, {}])
 
 const props = defineProps({
   items: {
@@ -30,24 +29,8 @@ onBeforeMount(() => {
     <div>Total</div>
     <div></div>
 
-    <template v-for="item in defaultItems">
-      <BaseInput
-        type="text"
-        placeholder=""
-      />
-      <BaseInput
-        type="number"
-        required
-        placeholder="0.00"
-      />
-      <BaseInput
-        type="number"
-        placeholder="0.00"
-      />
-      <div>156.01</div>
-      <div>
-        <font-awesome-icon icon="fa-solid fa-trash" class="text-[#8e93b1]" />
-      </div>
+    <template v-for="(item, index) in defaultItems" :key="index">
+      <ProductItem :item="item" />
     </template>
   </div>
 
