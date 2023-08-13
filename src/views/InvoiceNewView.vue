@@ -1,24 +1,27 @@
 <script setup>
 import { ref } from 'vue'
-  const form = ref({
-    billFromStreetAddress: '',
-    billFromCity: '',
-    billFromPostCode: '',
-    billFromCountry: '',
-    billToClientName: '',
-    billToClientEmail: '',
-    billToClientStreetAddress: '',
-    billToCity: '',
-    billToPostCode: '',
-    billToCountry: '',
-    invoiceDate: '',
-    paymentTerms: '',
-    projectDescription: '',
-  })
 
-  const onSubmit = (event) => {
-    console.log(form.value)
-  }
+import BaseInput from '../components/shared/BaseInput.vue';
+
+const form = ref({
+  billFromStreetAddress: '',
+  billFromCity: '',
+  billFromPostCode: '',
+  billFromCountry: '',
+  billToClientName: '',
+  billToClientEmail: '',
+  billToClientStreetAddress: '',
+  billToCity: '',
+  billToPostCode: '',
+  billToCountry: '',
+  invoiceDate: '',
+  paymentTerms: '',
+  projectDescription: '',
+})
+
+const onSubmit = (event) => {
+  console.log(form.value)
+}
 </script>
 
 <template>
@@ -33,13 +36,18 @@ import { ref } from 'vue'
         <h3 class="text-3xl font-extrabold">New Invoice</h3>
       </div>
 
+      <pre class="text-white">{{ form }}</pre>
+
       <form @submit.prevent="onSubmit">
         <h4 class="text-[#5b5290] font-bold mb-5">Bill From</h4>
 
-        <label class="text-white flex flex-col gap-2 mb-4">
-          Street Address
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billFromStreetAddress" />
-        </label>
+        <BaseInput
+          type="text"
+          required
+          placeholder="Codigo 234 Av."
+          label="Street Address"
+          v-model="form.billFromStreetAddress"
+       />
 
         <div class="flex gap-6">
           <label class="text-white flex flex-col gap-2 mb-4">
