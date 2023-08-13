@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import BaseInput from '../components/shared/BaseInput.vue';
+import BaseSelect from '../components/shared/BaseSelect.vue';
 
 const form = ref({
   billFromStreetAddress: '',
@@ -36,8 +37,6 @@ const onSubmit = (event) => {
         <h3 class="text-3xl font-extrabold">New Invoice</h3>
       </div>
 
-      <pre class="text-white">{{ form }}</pre>
-
       <form @submit.prevent="onSubmit">
         <h4 class="text-[#5b5290] font-bold mb-5">Bill From</h4>
 
@@ -50,57 +49,89 @@ const onSubmit = (event) => {
        />
 
         <div class="flex gap-6">
-          <label class="text-white flex flex-col gap-2 mb-4">
-            City
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billFromCity" />
-          </label>
-          <label class="text-white flex flex-col gap-2 mb-4">
-            Post Code
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billFromPostCode" />
-          </label>
-          <label class="text-white flex flex-col gap-2 mb-4">
-            Country
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billFromCountry" />
-          </label>
+          <BaseInput
+            type="text"
+            required
+            placeholder="Chiclayo"
+            label="City"
+            v-model="form.billFromCity"
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="00000"
+            label="Post Code"
+            v-model="form.billFromPostCode"
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="Peru"
+            label="Country"
+            v-model="form.billFromCountry"
+          />
         </div>
 
         <h4 class="text-[#5b5290] font-bold mb-5">Bill To</h4>
 
-        <label class="text-white flex flex-col gap-2 mb-4">
-          Client's Name
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToClientName" />
-        </label>
+        <BaseInput
+          type="text"
+          required
+          placeholder="Alyssa"
+          label="Client's Name"
+          v-model="form.billToClientName"
+        />
 
-        <label class="text-white flex flex-col gap-2 mb-4">
-          Client's Email
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToClientEmail" />
-        </label>
+        <BaseInput
+          type="text"
+          required
+          placeholder="alyssa@email.com"
+          label="Client's Email"
+          v-model="form.billToClientEmail"
+        />
 
-        <label class="text-white flex flex-col gap-2 mb-4">
-          Street Address
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToClientStreetAddress" />
-        </label>
+        <BaseInput
+          type="text"
+          required
+          placeholder="Codigo 234 Av."
+          label="Street Address"
+          v-model="form.billToClientStreetAddress"
+        />
 
         <div class="flex gap-6">
-          <label class="text-white flex flex-col gap-2 mb-4">
-            City
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToCity" />
-          </label>
-          <label class="text-white flex flex-col gap-2 mb-4">
-            Post Code
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToPostCode" />
-          </label>
-          <label class="text-white flex flex-col gap-2 mb-4">
-            Country
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.billToCountry" />
-          </label>
+          <BaseInput
+            type="text"
+            required
+            placeholder="Chiclayo"
+            label="City"
+            v-model="form.billToCity"
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="00000"
+            label="Post Code"
+            v-model="form.billToPostCode"
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="Peru"
+            label="Country"
+            v-model="form.billToCountry"
+          />
         </div>
 
         <div class="flex gap-6 mt-10">
-          <label class="text-white flex flex-col gap-2 mb-4 basis-1/2">
-            Invoice Date
-            <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.invoiceDate" />
-          </label>
+          <BaseInput
+            type="date"
+            required
+            placeholder="YYYY-MM-DD"
+            label="Invoice Date"
+            v-model="form.invoiceDate"
+          />
+
+
           <label class="text-white flex flex-col gap-2 mb-4 2basis-1/2">
             Payment Terms
             <select class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.paymentTerms">
@@ -108,34 +139,68 @@ const onSubmit = (event) => {
               <option selected>Next 30 Days</option>
               <option>Next 15 Days</option>
             </select>
+            <BaseSelect
+              label="Payment Terms"
+              :options="[
+                { value: '1', label: 'Next 60 Days' },
+                { value: '2', label: 'Next 30 Days' },
+                { value: '3', label: 'Next 15 Days' }
+              ]"
+              v-model="form.paymentTerms"
+            />
           </label>
         </div>
 
-        <label class="text-white flex flex-col gap-2 mb-4">
-          Project Description
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" v-model="form.projectDescription" />
-        </label>
+        <pre class="text-white">{{ form }}</pre>
+
+        <BaseInput
+          type="text"
+          required
+          placeholder="YYYY-MM-DD"
+          label="Project Description"
+          v-model="form.projectDescription"
+        />
 
         <h5 class="text-[#73758c] text-xl font-bold mb-5 mt-10">Item List</h5>
 
-        <div class="text-white grid grid-cols-5 gap-4 mb-5">
+        <div class="text-white grid grid-cols-5 gap-4 mb-5 items-center">
           <div>Item Name</div>
           <div>Qty.</div>
           <div>Price</div>
           <div>Total</div>
           <div></div>
 
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
+          <BaseInput
+            type="text"
+            placeholder=""
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="0.00"
+          />
+          <BaseInput
+            type="text"
+            placeholder="0.00"
+          />
           <div>156.01</div>
           <div>
             <font-awesome-icon icon="fa-solid fa-trash" class="text-[#8e93b1]" />
           </div>
 
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
-          <input type="text" class="w-full py-4 px-5 rounded-lg bg-[#1f213a]" />
+          <BaseInput
+            type="text"
+            placeholder=""
+          />
+          <BaseInput
+            type="text"
+            required
+            placeholder="0.00"
+          />
+          <BaseInput
+            type="text"
+            placeholder="0.00"
+          />
           <div>156.01</div>
           <div>
             <font-awesome-icon icon="fa-solid fa-trash" class="text-[#8e93b1]" />

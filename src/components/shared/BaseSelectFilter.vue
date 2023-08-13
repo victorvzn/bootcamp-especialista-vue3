@@ -21,18 +21,19 @@ defineProps({
 
 <template>
   <label>
-    <span v-if="label">{{ label }}</span>
+    {{ label }}
     <select
-      class="w-full py-4 px-5 rounded-lg bg-[#1f213a]"
+      class="bg-transparent text-lg font-bold text-white w-44"
       v-bind="$attrs"
       @onChange="$emit('update:modelValue', $event.target.value)"
     >
       <option
+        class="text-slate-800 capitalize"
         v-for="option in options"
         :key="option.value"
         :value="option.value"
       >
-        {{ option.label }} {{ option.value }}
+        {{ option.label }}
       </option>
     </select>
   </label>

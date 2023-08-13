@@ -6,7 +6,7 @@ defineOptions({
 defineProps({
   label: {
     type: String,
-    default: 'Base label'
+    default: ''
   },
   modelValue: {
     type: [String, Number],
@@ -17,7 +17,7 @@ defineProps({
 
 <template>
   <label class="text-white flex flex-col gap-2 mb-4">
-    {{ label }}
+    <span v-if="label">{{ label }}</span>
     <input
       type="text"
       class="w-full py-4 px-5 rounded-lg bg-[#1f213a]"
