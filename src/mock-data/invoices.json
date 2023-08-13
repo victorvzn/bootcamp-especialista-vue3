@@ -37,9 +37,9 @@
         }
       },
       "invoice": {
-        "date": "21 Aug 2023",
+        "date": "2023-08-21",
         "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "paymentTerms": "2",
         "project": {
           "description": "Graphic Design 1"
         },
@@ -59,6 +59,12 @@
             "qty": 2,
             "price": 200.00,
             "total": 400.00
+          },
+          {
+            "name": "Email Design",
+            "qty": 4,
+            "price": 400.00,
+            "total": 1600.00
           }
         ]
       }
@@ -86,9 +92,9 @@
         }
       },
       "invoice": {
-        "date": "19 Aug 2023",
+        "date": "2023-08-19",
         "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "paymentTerms": "3",
         "project": {
           "description": "Graphic Design 2"
         },
@@ -135,9 +141,9 @@
         }
       },
       "invoice": {
-        "date": "01 Oct 2023",
+        "date": "2023-10-01",
         "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "paymentTerms": "2",
         "project": {
           "description": "Graphic Design 3"
         },
@@ -184,9 +190,9 @@
         }
       },
       "invoice": {
-        "date": "12 Oct 2023",
-        "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "date": "2023-10-12",
+        "invoiceDue": "2023-10-28",
+        "paymentTerms": "1",
         "project": {
           "description": "Graphic Design 4"
         },
@@ -233,9 +239,9 @@
         }
       },
       "invoice": {
-        "date": "14 Oct 2023",
-        "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "date": "2023-10-14",
+        "invoiceDue": "2023-10-22",
+        "paymentTerms": "3",
         "project": {
           "description": "Graphic Design 5"
         },
@@ -282,9 +288,9 @@
         }
       },
       "invoice": {
-        "date": "12 Nov 2023",
-        "invoiceDue": "2023-10-12",
-        "paymentTerms": "Next 30 Days",
+        "date": "2023-11-20",
+        "invoiceDue": "2023-12-20",
+        "paymentTerms": "2",
         "project": {
           "description": "Graphic Design 6"
         },

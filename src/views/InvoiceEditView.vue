@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import { useInvoicesStore } from '@/stores/invoices'
@@ -12,12 +12,16 @@ const { getOne, getInvoice } = useInvoicesStore()
 
 const { id } = route.params
 
-onBeforeMount(async () => await getOne(id))
+onBeforeMount(async () => {
+  await getOne(id)
+})
 </script>
 
 <template>
-  <InvoiceForm
-    label="Edit #12345"
-    :data="getInvoice()"
-  />
+  <div v-if="getInvoice()">
+    <InvoiceForm
+      label="Edit #12345"
+      :data="getInvoice()"
+    />
+  </div>
 </template>

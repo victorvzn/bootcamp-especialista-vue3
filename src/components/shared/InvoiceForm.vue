@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 
 import BaseInput from '@/components/shared/BaseInput.vue';
 import BaseSelect from '@/components/shared/BaseSelect.vue';
@@ -32,14 +32,35 @@ const onSubmit = (event) => {
   console.log(form.value)
 }
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
     default: ''
   },
   data: {
     type: Object,
-    required: true
+    data: {}
+  }
+})
+
+onBeforeMount(() => {
+  if (props.data) {
+    form.value = {
+      billFromStreetAddress: props.data.bill.from.streetAddress,
+      billFromCity: props.data.bill.from.city,
+      billFromPostCode: props.data.bill.from.postCode,
+      billFromCountry: props.data.bill.from.country,
+      billToClientName: props.data.bill.to.client.name,
+      billToClientEmail: props.data.bill.to.client.email,
+      billToClientStreetAddress: props.data.bill.to.streetAddress,
+      billToCity: props.data.bill.to.city,
+      billToPostCode: props.data.bill.to.postCode,
+      billToCountry: props.data.bill.to.country,
+      invoiceDate: props.data.invoice.date,
+      paymentTerms: props.data.invoice.paymentTerms,
+      projectDescription: props.data.invoice.project.description,
+      invoiceItems: props.data.invoice.items
+    }
   }
 })
 </script>
@@ -185,7 +206,5 @@ defineProps({
         </div>
       </form>
     </section>
-
-    <pre class="text-white">{{ data }}</pre>
   </div>
 </template>

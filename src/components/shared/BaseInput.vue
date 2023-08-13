@@ -22,6 +22,7 @@ defineProps({
       type="text"
       class="w-full py-4 px-5 rounded-lg bg-[#1f213a]"
       v-bind="$attrs"
+      :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"  
     />
   </label>
