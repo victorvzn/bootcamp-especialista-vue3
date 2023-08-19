@@ -1,0 +1,75 @@
+{
+  "boards": [
+    {
+      "id": "1",
+      "name": "Platform Launch",
+      "user_id": 1,
+      "cards": [
+        {
+          "id": "1",
+          "title": "Build Ui for task managment",
+          "description": "It's always good to take a break.",
+          "subtasks": [
+            {
+              "title": "Make coffe",
+              "completed": true
+            },
+            {
+              "title": "Drink coffe & smile",
+              "completed": false
+            }
+          ],
+          "status": "todo",
+          "board_id": 1
+        },
+        {
+          "id": "2",
+          "title": "Build Ui for search",
+          "description": "It's always good to take a break 2.",
+          "subtasks": [
+            {
+              "title": "Make coffe 2",
+              "completed": false
+            },
+            {
+              "title": "Drink coffe & smile 2",
+              "completed": false
+            }
+          ],
+          "status": "doing",
+          "board_id": 1
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Marketing Plan",
+      "user_id": 1,
+      "cards": [
+        {
+          "id": "2",
+          "title": "Build settings Ui",
+          "description": "It's always good to take a break 3.",
+          "subtasks": [
+            {
+              "title": "Make coffe 3",
+              "completed": false
+            },
+            {
+              "title": "Drink coffe & smile 3",
+              "completed": false
+            }
+          ],
+          "status": "done",
+          "board_id": 2
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Roadmap",
+      "user_id": 2,
+      "cards": []
+    }
+  ]
+}
