@@ -1,14 +1,35 @@
-# Repositorio: Bootcamp Especialista Vue 3 de Codigo G01
+# .
 
-<p align="center">
-  <img src="https://assets.website-files.com/624b2bd5b7be89e20392d489/624e1be85a96e3ac3e45f7fb_logo-color-go.svg" />
-</p>
+This template should help get you started developing with Vue 3 in Vite.
 
-Este será el repositorio del bootcamp Especialista Vue3.
+## Recommended IDE Setup
 
-Las semanas y los días estarán distribuidas por _branches_(ramas) en la cual cada semana y día será una _branch_.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-A continuación, las semanas:
+## Customize configuration
 
-- Semana 01, Día 01 - CRUD de Empresas
-- Semana 01, Día 02 - Listado de heroes con paginación
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
