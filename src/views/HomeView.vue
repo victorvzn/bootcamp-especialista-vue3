@@ -1,13 +1,26 @@
 <script setup>
+import { ref } from 'vue'
+
 import BaseCard from '@/components/shared/BaseCard.vue'
 
 import { useBoardStore } from '@/stores/board'
 
 const { createBoard } = useBoardStore()
 
-const handleCreateBoard = () => {
+const showNewBoardModal = ref(false)
+
+const handleNewBoard = () => showNewBoardModal.value = true
+
+const formBoard = ref({
+  name: '',
+  columns: []
+})
+
+const handleCreateBoard = async () => {
   console.log('Creando board...')
-  createBoard({ ejemplo: 'hola' })
+  const response = await createBoard(formBoard)
+
+  console.log(response)
 }
 </script>
 
@@ -30,7 +43,7 @@ const handleCreateBoard = () => {
               variant="flat"
               color="indigo-darken-3"
               block
-              @click="handleCreateBoard"
+              @click="handleNewBoard"
             >
               + Create New Board
             </v-btn>
@@ -97,5 +110,45 @@ const handleCreateBoard = () => {
         </div>
       </v-col>
     </v-row>
+
+    <v-dialog
+      v-model="showNewBoardModal"
+      width="500px"
+    >
+      <v-card title="Add New Board">
+        {{ formBoard }}
+        <v-card-text>
+          <v-form>
+            <v-text-field
+              v-model="formBoard.name"
+              label="Board Name"
+              placeholder="e.g. Web Design"
+            />
+            <div class="mb-8">
+              <h5 class="mb-2">Board Columns</h5>
+              <div class="d-flex" style="gap: 1rem;">
+                <v-text-field
+                  placeholder="e.g. Todo"
+                />
+                <VBtn>❌</VBtn>
+              </div>
+              <div class="d-flex" style="gap: 1rem;">
+                <v-text-field
+                  placeholder="e.g. Doing"
+                />
+                <VBtn>❌</VBtn>
+              </div>
+              <VBtn block color="primary">+ Add New Column</VBtn>
+            </div>
+          </v-form>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-btn color="primary" block @click="handleCreateBoard = false">
+            Create Board 
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>

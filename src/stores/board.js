@@ -15,18 +15,30 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
-    async createBoard(data) {
+    async createBoard({ name, columns }) {
       try {
-        const newCollection = collection(db, 'test')
+        const newCollection = collection(db, 'boards')
         const docReference = await addDoc(newCollection, {
-          name: 'Laptop',
-          price: 3500,
-          category: ['computo', 'dell']
+          name,
+          columns,
         })
-        console.log(docReference.id)
+        return docReference
       } catch (e) {
         console.error(e)
       }
-    }
+    },
+    // async createBoard(data) {
+    //   try {
+    //     const newCollection = collection(db, 'test')
+    //     const docReference = await addDoc(newCollection, {
+    //       name: 'Laptop',
+    //       price: 3500,
+    //       category: ['computo', 'dell']
+    //     })
+    //     console.log(docReference.id)
+    //   } catch (e) {
+    //     console.error(e)
+    //   }
+    // }
   }
 })
