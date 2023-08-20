@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth';
 
+import { useRouter } from 'vue-router';
+
 const {
   getLoading,
   getUser,
@@ -9,6 +11,8 @@ const {
   login,
   logout,
 } = useAuthStore()
+
+const router = useRouter()
 
 const form = ref({
   email: '',
@@ -20,7 +24,7 @@ const handleLogin = async () => {
   const password = form.value.password
 
   login(email, password)
-    .then(() => )
+    .then(() => router.push({ name: 'home' }))
 }
 
 const handleLogout = async () => {
