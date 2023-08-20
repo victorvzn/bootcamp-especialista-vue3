@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const showNewTaskModal = ref(false)
 
@@ -11,6 +12,15 @@ const handleAddNewTask = () => showNewTaskModal.value = true
     <v-app-bar color="amber-darken-3">
       <v-container class="d-flex justify-space-between">
         <h1 class="text-h6">Task Managment</h1>
+
+        <div class="d-flex" style="gap: .5rem;">
+          <RouterLink :to="{ name: 'login' }">
+            <VBtn variant="flat" color="grey-lighten-3">Login</VBtn>
+          </RouterLink>
+          <RouterLink :to="{ name: 'register' }">
+            <VBtn variant="flat" color="grey-lighten-3">Register</VBtn>
+          </RouterLink>
+        </div>
 
         <v-btn
           variant="flat"
