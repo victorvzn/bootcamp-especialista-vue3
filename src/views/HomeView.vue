@@ -9,18 +9,32 @@ const { createBoard } = useBoardStore()
 
 const showNewBoardModal = ref(false)
 
+const refFormNewBoard = ref()
+
 const handleNewBoard = () => showNewBoardModal.value = true
 
 const formBoard = ref({
   name: '',
-  columns: []
+  columns: ['Todo', 'Doing', 'Done']
 })
 
 const handleCreateBoard = async () => {
-  console.log('Creando board...')
-  const response = await createBoard(formBoard)
+  const { valid } = await refFormNewBoard.value.validate()
 
-  console.log(response)
+  if (valid) {
+    console.log('Creando board...')
+    const response = await createBoard(formBoard.value)
+  
+    if (response.id) {
+      showNewBoardModal.value = false
+    }
+  }
+}
+
+const requiredField = (value) => {
+  if (value) return true
+
+  return 'This field is required'
 }
 </script>
 
@@ -116,38 +130,50 @@ const handleCreateBoard = async () => {
       width="500px"
     >
       <v-card title="Add New Board">
-        {{ formBoard }}
         <v-card-text>
-          <v-form>
+          <v-form
+            ref="refFormNewBoard"
+            @submit.prevent="handleCreateBoard"
+          >
             <v-text-field
               v-model="formBoard.name"
               label="Board Name"
               placeholder="e.g. Web Design"
+              :rules="[requiredField]"
             />
             <div class="mb-8">
               <h5 class="mb-2">Board Columns</h5>
               <div class="d-flex" style="gap: 1rem;">
                 <v-text-field
                   placeholder="e.g. Todo"
+                  v-model="formBoard.columns[0]"
+                  :rules="[requiredField]"
                 />
                 <VBtn>❌</VBtn>
               </div>
               <div class="d-flex" style="gap: 1rem;">
                 <v-text-field
                   placeholder="e.g. Doing"
+                  v-model="formBoard.columns[1]"
                 />
                 <VBtn>❌</VBtn>
               </div>
-              <VBtn block color="primary">+ Add New Column</VBtn>
+              <div class="d-flex" style="gap: 1rem;">
+                <v-text-field
+                  placeholder="e.g. Doing"
+                  v-model="formBoard.columns[2]"
+                />
+                <VBtn>❌</VBtn>
+              </div>
+              <VBtn block color="primary" style="display:none;">
+                + Add New Column
+              </VBtn>
             </div>
+            <v-btn type="submit" color="primary" flat block>
+              Create Board 
+            </v-btn>
           </v-form>
         </v-card-text>
-
-        <v-card-actions>
-          <v-btn color="primary" block @click="handleCreateBoard = false">
-            Create Board 
-          </v-btn>
-        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>

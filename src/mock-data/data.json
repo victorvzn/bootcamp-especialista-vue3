@@ -3,6 +3,7 @@
     {
       "id": "1",
       "name": "Platform Launch",
+      "columns": ["Todo", "Doing", "Done"],
       "user_id": 1,
       "cards": [
         {
@@ -44,6 +45,7 @@
     {
       "id": "2",
       "name": "Marketing Plan",
+      "columns": ["Todo", "Doing", "Done"],
       "user_id": 1,
       "cards": [
         {
@@ -68,6 +70,7 @@
     {
       "id": "3",
       "name": "Roadmap",
+      "columns": ["Backlog", "In Progress", "Done"],
       "user_id": 2,
       "cards": []
     }
