@@ -1,22 +1,55 @@
 <script setup>
+import { ref } from 'vue'
+import { useAuthStore } from '../stores/auth';
+
+const {
+  getLoading,
+  getUser,
+  getIsAuth,
+  login,
+  logout,
+} = useAuthStore()
+
+const form = ref({
+  email: '',
+  password: '',
+})
+
+const handleLogin = async () => {
+  const email = form.value.email
+  const password = form.value.password
+
+  login(email, password)
+    .then(() => )
+}
+
+const handleLogout = async () => {
+  await logout()
+}
 </script>
 
 <template>
   <VContainer class="d-flex justify-center">
     <VSheet width="400">
       <h2 class="mb-2">Login</h2>
-      <VForm>
+      - {{ getIsAuth }} -
+      - {{ getLoading }} -
+      - {{ getUser }} -
+      <VForm @submit.prevent="handleLogin">
         <VTextField
-        label="Email"
-        placeholder="jhondoe@gmail.com"
+          label="Email"
+          placeholder="jhondoe@gmail.com"
+          v-model="form.email"
         />
         <VTextField
-        type="password"
-        label="Password"
-        placeholder="supersecret"
+          type="password"
+          label="Password"
+          placeholder="supersecret"
+          v-model="form.password"
         />
         <v-btn type="submit" block class="mt-2" color="primary">Login</v-btn>
-      </VForm>
+        </VForm>
+        <v-btn block class="mt-2" color="primary" @click="handleLogout">Logout</v-btn>
     </VSheet>
   </VContainer>
 </template>
