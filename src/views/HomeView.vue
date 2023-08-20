@@ -55,7 +55,7 @@ import BaseCard from '@/components/shared/BaseCard.vue'
       <BaseCard />
       <BaseCard />
     </VSheet>
-    <VSheet color="grey-lighten-4 pa-8 text-h6 d-flex justify-center align-center" width="300" rounded>
+    <VSheet color="grey-lighten-4 pa-8" width="300" rounded>
       + New Column
     </VSheet>
   </div>
