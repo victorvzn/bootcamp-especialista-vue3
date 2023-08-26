@@ -15,6 +15,20 @@ export const useBoardStore = defineStore({
       console.log('111', state.boards)
       return state.boards
     },
+    getColumnsBoardById: (state) => {
+      return (boardId) => {
+        const boardFound = state.boards.find(board => board.id === boardId)
+        return boardFound?.columns
+      }
+    },
+    getCardsBoardByStatus(state) {
+      return (boardId, taskStatus) => {
+        const boardFound = state.boards.find(board => board.id === boardId)
+        const tasksFound = boardFound.tasks ? boardFound.tasks : []
+        const tasksByStatus = tasksFound.filter(task => task.status === taskStatus)
+        return tasksByStatus
+      }
+    },
     isLoading(state) {
       return state.loading
     }
@@ -42,8 +56,8 @@ export const useBoardStore = defineStore({
         console.log(documents)
         
         documents.forEach(doc => {
-          console.log(doc.id, doc.data())
-          this.boards.push({ id: doc.id, ...doc.data() })
+          console.log(doc.id, doc.data()) // --> tasks
+          this.boards.push({ id: doc.id, ...doc.data(), tasks: [] })
         })
 
         // const newBoards = documents.docs.map(
