@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 
 import BaseCard from '@/components/shared/BaseCard.vue'
 
 import { useBoardStore } from '@/stores/board'
 
-const { createBoard } = useBoardStore()
+const { createBoard, fetchBoards } = useBoardStore()
 
 const showNewBoardModal = ref(false)
 
@@ -36,6 +36,10 @@ const requiredField = (value) => {
 
   return 'This field is required'
 }
+
+onBeforeMount(() => {
+  fetchBoards()
+})
 </script>
 
 <template>

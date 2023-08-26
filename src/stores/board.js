@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 import { db } from '@/services/firebase'
 
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, getDocs, query } from 'firebase/firestore'
 
 export const useBoardStore = defineStore({
   id: 'board',
@@ -27,6 +27,21 @@ export const useBoardStore = defineStore({
         console.error(e)
       }
     },
+    async fetchBoards() {
+      try {
+        const boardsCollection = collection(db, 'boards')
+        const q = query(boardsCollection, /* where */)
+        const documents = await getDocs(q)
+
+        console.log(documents)
+
+        documents.forEach(doc => {
+          console.log(doc.id, doc.data())
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }
     // async createBoard(data) {
     //   try {
     //     const newCollection = collection(db, 'test')
