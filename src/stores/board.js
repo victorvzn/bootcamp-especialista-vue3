@@ -7,11 +7,16 @@ import { collection, addDoc, getDocs, query } from 'firebase/firestore'
 export const useBoardStore = defineStore({
   id: 'board',
   state: () => ({
+    loading: false,
     boards: []
   }),
   getters: {
-    getBoard(state) {
-      return state.board
+    getBoards(state) {
+      console.log('111', state.boards)
+      return state.boards
+    },
+    isLoading(state) {
+      return state.loading
     }
   },
   actions: {
@@ -29,23 +34,28 @@ export const useBoardStore = defineStore({
     },
     async fetchBoards() {
       try {
+        this.loading = true
         const boardsCollection = collection(db, 'boards')
         const q = query(boardsCollection, /* where */)
         const documents = await getDocs(q)
 
         console.log(documents)
         
-        // documents.forEach(doc => {
-        //   console.log(doc.id, doc.data())
-        // })
+        documents.forEach(doc => {
+          console.log(doc.id, doc.data())
+          this.boards.push({ id: doc.id, ...doc.data() })
+        })
 
-        const newBoards = documents.docs.map(
-          doc => ({ id: doc.id, ...doc.data() })
-        )
+        // const newBoards = documents.docs.map(
+        //   doc => ({ id: doc.id, ...doc.data() })
+        // )
 
-        this.boards = newBoards
+        this.loading = false
       } catch (e) {
         console.log(e)
+      } finally {
+        console.log('finally')
+        this.loading = false
       }
     }
     // async createBoard(data) {
