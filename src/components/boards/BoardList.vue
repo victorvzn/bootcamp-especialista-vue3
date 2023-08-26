@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 import { useBoardStore } from '@/stores/board'
 
@@ -39,6 +40,7 @@ const handleCreateBoard = async () => {
           :key="board.id"
           :title="board.name ? board.name : '<no-name>'"
           link
+          :to="{ name: 'board-detail', params: { id: board.id }}"
         />
     </v-list>
 
