@@ -7,7 +7,7 @@ import { collection, addDoc, getDocs, query } from 'firebase/firestore'
 export const useBoardStore = defineStore({
   id: 'board',
   state: () => ({
-    board: []
+    boards: []
   }),
   getters: {
     getBoard(state) {
@@ -34,10 +34,16 @@ export const useBoardStore = defineStore({
         const documents = await getDocs(q)
 
         console.log(documents)
+        
+        // documents.forEach(doc => {
+        //   console.log(doc.id, doc.data())
+        // })
 
-        documents.forEach(doc => {
-          console.log(doc.id, doc.data())
-        })
+        const newBoards = documents.docs.map(
+          doc => ({ id: doc.id, ...doc.data() })
+        )
+
+        this.boards = newBoards
       } catch (e) {
         console.log(e)
       }
