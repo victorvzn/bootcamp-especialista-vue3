@@ -29,7 +29,7 @@ const handleLogout = () => {
     }) 
 }
 
-const handleAddNewTask = async () => {
+const handleSaveNewTask = async () => {
   try {
 
     const { title, description, status, subtasks } = form.value
