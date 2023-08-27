@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 
 import { db } from '@/services/firebase'
 
-import { collection, addDoc, getDocs, query } from 'firebase/firestore'
+import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
+
+import { useAuthStore } from '../stores/auth'
 
 export const useBoardStore = defineStore({
   id: 'board',
@@ -48,9 +50,13 @@ export const useBoardStore = defineStore({
     },
     async fetchBoards() {
       try {
+        const useAuth = useAuthStore()
         this.loading = true
         const boardsCollection = collection(db, 'boards')
-        const q = query(boardsCollection, /* where */)
+        const q = query(
+          boardsCollection,
+          where("userId", "==", useAuth.user.uid)
+        )
         const documents = await getDocs(q)
 
         console.log(documents)

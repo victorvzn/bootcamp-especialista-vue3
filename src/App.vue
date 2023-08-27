@@ -43,7 +43,7 @@ const handleLogout = () => {
         </div>
 
         <div class="d-flex" style="gap: .5rem;">
-          --{{ useAuth.user }}--
+          <strong>Hi, {{ useAuth?.user?.email }}</strong>
           <VBtn
             variant="flat"
             color="grey-lighten-3"
