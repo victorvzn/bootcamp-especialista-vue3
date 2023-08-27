@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 import { db } from '@/services/firebase'
 
-import { collection, addDoc, getDocs, query, where } from 'firebase/firestore'
+import { collection, addDoc, getDocs, query, where, doc, updateDoc } from 'firebase/firestore'
 
 import { useAuthStore } from '../stores/auth'
 
@@ -10,7 +10,8 @@ export const useBoardStore = defineStore({
   id: 'board',
   state: () => ({
     loading: false,
-    boards: []
+    boards: [],
+    tasks: null
   }),
   getters: {
     getBoards(state) {
@@ -27,6 +28,7 @@ export const useBoardStore = defineStore({
       return (boardId, taskStatus) => {
         const boardFound = state.boards.find(board => board.id === boardId)
         const tasksFound = boardFound.tasks ? boardFound.tasks : []
+        state.tasks = tasksFound
         const tasksByStatus = tasksFound.filter(task => task.status === taskStatus)
         return tasksByStatus
       }
@@ -36,6 +38,26 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
+    async createTask({
+      docId, title, description, status, subtasks
+    }) {
+      const newDoc = doc(db, 'boards', docId)
+      const newTask = {
+        id: crypto.randomUUID(),
+        title,
+        description,
+        status,
+        subtasks
+      }
+      const oldTasks = this.tasks
+      const docReference = await updateDoc(
+        newDoc,
+        {
+          tasks: [...oldTasks, newTask]
+        }
+      )
+      return docReference
+    },
     async createBoard({ name, columns }) {
       try {
         const useAuth = useAuthStore()
