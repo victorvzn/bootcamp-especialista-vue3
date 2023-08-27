@@ -32,12 +32,7 @@ const route = useRoute()
         ></v-badge>
         {{ column  }} (0)
       </h2>
-      {{ getCardsBoardByStatus(route.params.id, column) }}
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
+      *{{ getCardsBoardByStatus(route.params.id, column) }}*
       <BaseCard />
     </VSheet>
 </div>

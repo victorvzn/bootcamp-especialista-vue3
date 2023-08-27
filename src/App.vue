@@ -46,9 +46,8 @@ const handleSaveNewTask = async () => {
 
     showNewTaskModal.value = false
   } catch (error) {
-    console.error(e)
+    console.error(error)
   } 
-  
 }
 </script>
 
@@ -143,7 +142,7 @@ const handleSaveNewTask = async () => {
             <VBtn block color="primary">+ Add New Subtask</VBtn>
           </div>
           <v-select
-            :items="['Todo', 'Doing', 'Done']"
+            :items="useBoard.getColumnsBoardById(route.params.id)"
             label="Status"
             v-model="form.status"
           />
@@ -159,9 +158,3 @@ const handleSaveNewTask = async () => {
     </v-card>
   </v-dialog>
 </template>
-
-<!-- 
-<nav>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-</nav> -->

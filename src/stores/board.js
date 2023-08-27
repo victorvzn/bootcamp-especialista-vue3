@@ -27,7 +27,9 @@ export const useBoardStore = defineStore({
     getCardsBoardByStatus(state) {
       return (boardId, taskStatus) => {
         const boardFound = state.boards.find(board => board.id === boardId)
+        console.log('boardFound', boardFound)
         const tasksFound = boardFound.tasks ? boardFound.tasks : []
+        console.log('getCardsBoardByStatus', boardFound)
         state.tasks = tasksFound
         const tasksByStatus = tasksFound.filter(task => task.status === taskStatus)
         return tasksByStatus
