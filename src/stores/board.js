@@ -38,10 +38,13 @@ export const useBoardStore = defineStore({
   actions: {
     async createBoard({ name, columns }) {
       try {
+        const useAuth = useAuthStore()
+        console.log('useAuth.user.uid', useAuth.user.uid)
         const newCollection = collection(db, 'boards')
         const docReference = await addDoc(newCollection, {
           name,
           columns,
+          userId: useAuth.user.uid
         })
         return docReference
       } catch (e) {
