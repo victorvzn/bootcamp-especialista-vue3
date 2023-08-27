@@ -1,15 +1,25 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore }  from './stores/auth'
+import { useBoardStore } from './stores/board';
 
 const showNewTaskModal = ref(false)
 
+const useBoard = useBoardStore()
 const useAuth = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
-const handleAddNewTask = () => showNewTaskModal.value = true
+const form = ref({
+  title: '',
+  description: '',
+  status: '',
+  subtasks: [],
+})
+
+const handleAddNewTaskModal = () => showNewTaskModal.value = true
 
 const handleLogout = () => {
   useAuth
@@ -17,6 +27,28 @@ const handleLogout = () => {
     .then(() => {
       router.push({ name: 'login' })
     }) 
+}
+
+const handleAddNewTask = async () => {
+  try {
+
+    const { title, description, status, subtasks } = form.value
+
+    const docId = route.params.id
+
+    await useBoard.createTask({
+      docId,
+      title,
+      description,
+      status,
+      subtasks
+    })
+
+    showNewTaskModal.value = false
+  } catch (error) {
+    console.error(e)
+  } 
+  
 }
 </script>
 
@@ -53,7 +85,7 @@ const handleLogout = () => {
           <v-btn
             variant="flat"
             color="indigo-darken-3"
-            @click="handleAddNewTask"
+            @click="handleAddNewTaskModal"
             v-if="useAuth.isLoggedIn"
           >
             + Add New Task
@@ -83,14 +115,16 @@ const handleLogout = () => {
   >
     <v-card title="Add New Task">
       <v-card-text>
-        <v-form>
+        <v-form @submit.prevent="handleSaveNewTask">
           <v-text-field
             label="Title"
             placeholder="e.g. Take coffee break"
+            v-model="form.title"
           />
           <v-textarea
             label="Description"
             placeholder="e.g. It's always goog to take a break."
+            v-model="form.description"
           />
           <div class="mb-8">
             <h5 class="mb-2">Subtasks</h5>
@@ -111,15 +145,17 @@ const handleLogout = () => {
           <v-select
             :items="['Todo', 'Doing', 'Done']"
             label="Status"
-          ></v-select>
+            v-model="form.status"
+          />
+          <v-btn
+            type="submit"
+            color="primary"
+            block
+          >
+            Create Task 
+          </v-btn>
         </v-form>
       </v-card-text>
-
-      <v-card-actions>
-        <v-btn color="primary" block @click="showNewTaskModal = false">
-          Create Task 
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
