@@ -1,10 +1,23 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { useAuthStore }  from './stores/auth'
 
 const showNewTaskModal = ref(false)
 
+const useAuth = useAuthStore()
+const router = useRouter()
+
 const handleAddNewTask = () => showNewTaskModal.value = true
+
+const handleLogout = () => {
+  useAuth
+    .logout()
+    .then(() => {
+      router.push({ name: 'login' })
+    }) 
+}
 </script>
 
 <template>
@@ -22,10 +35,24 @@ const handleAddNewTask = () => showNewTaskModal.value = true
           </RouterLink>
         </div>
 
-        <v-btn
-          variant="flat"
-          color="indigo-darken-3"
-          @click="handleAddNewTask">+ Add New Task</v-btn>
+        <div class="d-flex" style="gap: .5rem;">
+          <v-btn
+            variant="flat"
+            color="indigo-darken-3"
+            @click="handleAddNewTask">+ Add New Task</v-btn>
+        </div>
+
+        <div class="d-flex" style="gap: .5rem;">
+          --{{ useAuth.user }}--
+          <VBtn
+            variant="flat"
+            color="grey-lighten-3"
+            @click="handleLogout"
+          >
+            Logout  
+          </VBtn>
+        </div>
+       
       </v-container>
     </v-app-bar>
 

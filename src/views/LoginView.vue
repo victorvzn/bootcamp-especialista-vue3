@@ -9,7 +9,6 @@ const {
   getUser,
   getIsAuth,
   login,
-  logout,
 } = useAuthStore()
 
 const router = useRouter()
@@ -25,10 +24,6 @@ const handleLogin = async () => {
 
   login(email, password)
     .then(() => router.push({ name: 'home' }))
-}
-
-const handleLogout = async () => {
-  await logout()
 }
 </script>
 
@@ -53,7 +48,6 @@ const handleLogout = async () => {
         />
         <v-btn type="submit" block class="mt-2" color="primary">Login</v-btn>
         </VForm>
-        <v-btn block class="mt-2" color="primary" @click="handleLogout">Logout</v-btn>
     </VSheet>
   </VContainer>
 </template>
