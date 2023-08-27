@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { auth } from '@/services/firebase'
 
 import {
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth'
@@ -53,7 +54,27 @@ export const useAuthStore = defineStore({
       } catch (error) {
         console.error(error)
       }
-
+    },
+    async currentUser() {
+      // https://firebase.google.com/docs/auth/web/manage-users
+      return new Promise((resolve, reject) => {
+        onAuthStateChanged(
+          auth,
+          user => {
+            if (user) {
+              this.user = {
+                email: user.email,
+                uid: user.uid,
+              }
+            } else {
+              this.user = null
+            }
+            console.log('currentUser-store', { user })
+            resolve(user)
+          },
+          error => reject(error)
+        )
+      })
     }
   }
 })
