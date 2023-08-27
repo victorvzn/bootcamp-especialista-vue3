@@ -20,6 +20,7 @@ const route = useRoute()
   <div class="d-flex" style="gap:2rem;">
     <VSheet
       class="d-flex flex-column"
+      width="300"
       style="gap:1rem;"
       v-for="(column, index) in getColumnsBoardById(route.params.id)"
       :key="index"
@@ -30,10 +31,13 @@ const route = useRoute()
           color="error"
           inline
         ></v-badge>
-        {{ column  }} (0)
+        {{ column  }} ({{ getCardsBoardByStatus(route.params.id, column).length }})
       </h2>
-      *{{ getCardsBoardByStatus(route.params.id, column) }}*
-      <BaseCard />
+      <BaseCard
+        v-for="(card, index) in getCardsBoardByStatus(route.params.id, column)"
+        :key="index"
+        :card="card"
+      />
     </VSheet>
 </div>
 </template>

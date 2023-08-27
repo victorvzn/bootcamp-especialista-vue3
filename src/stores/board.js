@@ -43,21 +43,25 @@ export const useBoardStore = defineStore({
     async createTask({
       docId, title, description, status, subtasks
     }) {
-      const newDoc = doc(db, 'boards', docId)
-      const newTask = {
-        id: crypto.randomUUID(),
-        title,
-        description,
-        status,
-        subtasks
-      }
       const oldTasks = this.tasks
+      console.log({ oldTasks})
+      const newDoc = doc(db, 'boards', docId)
       const docReference = await updateDoc(
         newDoc,
         {
-          tasks: [...oldTasks, newTask]
+          tasks: [
+            ...oldTasks,
+            {
+              id: crypto.randomUUID(),
+              title,
+              description,
+              status,
+              subtasks
+            }
+          ]
         }
       )
+      console.log({ docReference})
       return docReference
     },
     async createBoard({ name, columns }) {
@@ -90,7 +94,7 @@ export const useBoardStore = defineStore({
         
         documents.forEach(doc => {
           console.log(doc.id, doc.data()) // --> tasks
-          this.boards.push({ id: doc.id, ...doc.data(), tasks: [] })
+          this.boards.push({ id: doc.id, ...doc.data() })
         })
 
         // const newBoards = documents.docs.map(

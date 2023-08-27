@@ -44,7 +44,10 @@ const handleSaveNewTask = async () => {
       subtasks
     })
 
+    await useBoard.fetchBoards()
+
     showNewTaskModal.value = false
+
   } catch (error) {
     console.error(error)
   } 
