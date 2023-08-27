@@ -1,6 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import { useAuthStore } from '../stores/auth'
+
+const requireAuth = async (to, from, next) => {
+  console.log('currentUser')
+  const { currentUser } = useAuthStore()
+  
+  const existUser = await currentUser()
+
+  console.log('requireAuth', existUser)
+
+  if (existUser) {
+    next()
+  }  else {
+    next({ name: 'login' })
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,7 +31,9 @@ const router = createRouter({
           name: 'board-detail',
           component: () => import('../views/BoardDetail.vue')
         }
-      ]
+      ],
+      // Per-Route Guard
+      beforeEnter: requireAuth
     },
     {
       path: '/login',
@@ -41,5 +60,7 @@ const router = createRouter({
     }
   ]
 })
+
+
 
 export default router

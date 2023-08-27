@@ -1,10 +1,47 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import { useAuthStore } from './stores/auth';
+import { useBoardStore } from './stores/board';
+import { useRouter, useRoute } from 'vue-router';
+
+const useAuth = useAuthStore()
+const useBoard = useBoardStore()
+
+const router = useRouter()
+const route = useRoute()
 
 const showNewTaskModal = ref(false)
 
+const form = ref({
+  title: '',
+  description: '',
+  status: '',
+  subtasks: [],
+})
+
 const handleAddNewTask = () => showNewTaskModal.value = true
+
+const handleLogout = () => {
+  console.log('logout...'); 
+  useAuth.logout()
+    .then(() => {
+      router.push({ name: 'login' })
+    })
+}
+
+const handleSaveTask = async () => {
+  const { title, description, status } = form.value
+
+  await useBoard.createTask({
+    docId: route.params.id,
+    title: title,
+    description: description,
+    status: status,
+  })
+
+  showNewTaskModal.value = false
+}
 </script>
 
 <template>
@@ -14,18 +51,27 @@ const handleAddNewTask = () => showNewTaskModal.value = true
         <h1 class="text-h6">Task Managment</h1>
 
         <div class="d-flex" style="gap: .5rem;">
-          <RouterLink :to="{ name: 'login' }">
+          <RouterLink :to="{ name: 'login' }" v-if="!useAuth.isLoggedIn">
             <VBtn variant="flat" color="grey-lighten-3">Login</VBtn>
           </RouterLink>
-          <RouterLink :to="{ name: 'register' }">
+          <RouterLink :to="{ name: 'register' }" v-if="!useAuth.isLoggedIn">
             <VBtn variant="flat" color="grey-lighten-3">Register</VBtn>
           </RouterLink>
         </div>
+        <div class="d-flex" style="gap: .5rem;">
+          <v-btn
+            variant="flat"
+            color="indigo-darken-3"
+            @click="handleAddNewTask"
+            v-if="useAuth.isLoggedIn"
+          >
+            + Add New Task
+          </v-btn>
+          {{ useAuth.user?.email }}
+          <VBtn variant="flat" color="grey-lighten-3" @click="handleLogout" v-if="useAuth.isLoggedIn">Logout</VBtn>
+        </div>
 
-        <v-btn
-          variant="flat"
-          color="indigo-darken-3"
-          @click="handleAddNewTask">+ Add New Task</v-btn>
+        
       </v-container>
     </v-app-bar>
 
@@ -40,14 +86,16 @@ const handleAddNewTask = () => showNewTaskModal.value = true
   >
     <v-card title="Add New Task">
       <v-card-text>
-        <v-form>
+        <v-form @submit.prevent="handleSaveTask">
           <v-text-field
             label="Title"
             placeholder="e.g. Take coffee break"
+            v-model="form.title"
           />
           <v-textarea
             label="Description"
             placeholder="e.g. It's always goog to take a break."
+            v-model="form.description"
           />
           <div class="mb-8">
             <h5 class="mb-2">Subtasks</h5>
@@ -66,23 +114,15 @@ const handleAddNewTask = () => showNewTaskModal.value = true
             <VBtn block color="primary">+ Add New Subtask</VBtn>
           </div>
           <v-select
-            :items="['Todo', 'Doing', 'Done']"
+            :items="['todo', 'doing', 'done']"
             label="Status"
-          ></v-select>
+            v-model="form.status"
+          />
+          <v-btn type="submit" color="primary" block>
+            Create Task 
+          </v-btn>
         </v-form>
       </v-card-text>
-
-      <v-card-actions>
-        <v-btn color="primary" block @click="showNewTaskModal = false">
-          Create Task 
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
-
-<!-- 
-<nav>
-  <RouterLink to="/">Home</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-</nav> -->

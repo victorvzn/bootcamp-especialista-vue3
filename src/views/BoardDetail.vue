@@ -8,6 +8,7 @@ import { useBoardStore } from '@/stores/board'
 import BaseCard from '@/components/shared/BaseCard.vue'
 
 const useBoard = useBoardStore()
+
 const {
   getColumnsBoardById,
   getCardsBoardByStatus
@@ -20,6 +21,7 @@ const route = useRoute()
   <div class="d-flex" style="gap:2rem;">
     <VSheet
       class="d-flex flex-column"
+      width="300"
       style="gap:1rem;"
       v-for="(column, index) in getColumnsBoardById(route.params.id)"
       :key="index"
@@ -32,13 +34,12 @@ const route = useRoute()
         ></v-badge>
         {{ column  }} (0)
       </h2>
-      {{ getCardsBoardByStatus(route.params.id, column) }}
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
-      <BaseCard />
+      <!-- {{ /*getCardsBoardByStatus(route.params.id, column)*/ }} -->
+      <BaseCard
+        v-for="(card, index) in getCardsBoardByStatus(route.params.id, column)"
+        :key="index"
+        :card="card"
+      />
     </VSheet>
 </div>
 </template>

@@ -22,7 +22,10 @@ const handleCreateBoard = async () => {
 
   if (valid) {
     console.log('Creando board...')
-    const response = await createBoard(formBoard.value)
+    const response = await createBoard({
+      name: formBoard.value.name,
+      columns: formBoard.value.columns,
+    })
   
     if (response.id) {
       showNewBoardModal.value = false
@@ -34,7 +37,7 @@ const handleCreateBoard = async () => {
 <template>
   <v-card>
     <v-list>
-      <v-list-subheader>ALL BOARDS ({{ getBoards.length }}) {{ isLoading }}</v-list-subheader>
+      <v-list-subheader>ALL BOARDS ({{ getBoards.length }})</v-list-subheader>
         <v-list-item
           v-for="board in getBoards"
           :key="board.id"

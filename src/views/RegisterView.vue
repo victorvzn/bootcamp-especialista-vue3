@@ -1,13 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-// import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '../stores/auth';
 
-// import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
-// const {
-// } = useAuthStore()
+const { register } = useAuthStore()
 
-// const router = useRouter()
+const router = useRouter()
 
 const form = ref({
   firstName: '',
@@ -17,6 +16,11 @@ const form = ref({
 })
 
 const handleRegister = async () => {
+  const { email, password } = form.value
+
+  await register(email, password)
+
+  router.push({ name: 'login' })
 }
 </script>
 

@@ -22,9 +22,11 @@ const form = ref({
 const handleLogin = async () => {
   const email = form.value.email
   const password = form.value.password
+  console.log('>>>logi1n');
+  
+  await login(email, password)
 
-  login(email, password)
-    .then(() => router.push({ name: 'home' }))
+  router.push({ name: 'home' })
 }
 
 const handleLogout = async () => {

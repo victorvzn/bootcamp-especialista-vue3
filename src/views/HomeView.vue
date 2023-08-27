@@ -1,7 +1,6 @@
 <script setup>
 import { onBeforeMount } from 'vue'
 import { RouterView } from 'vue-router'
-
 import BoardList from '@/components/boards/BoardList.vue'
 
 import { useBoardStore } from '@/stores/board'
