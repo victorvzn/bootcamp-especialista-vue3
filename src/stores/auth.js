@@ -12,7 +12,6 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () =>({
     user: null,
-    isAuth: false,
     loading: false
   }),
   getters: {
@@ -22,8 +21,8 @@ export const useAuthStore = defineStore({
     getUser(state) {
       return state.user
     },
-    getIsAuth(state) {
-      return state.isAuth
+    isLoggedIn(state) {
+      return Boolean(state.user)
     }
   },
   actions: {

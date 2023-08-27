@@ -26,28 +26,44 @@ const handleLogout = () => {
       <v-container class="d-flex justify-space-between">
         <h1 class="text-h6">Task Managment</h1>
 
-        <div class="d-flex" style="gap: .5rem;">
-          <RouterLink :to="{ name: 'login' }">
+        <div
+          class="d-flex"
+          style="gap: .5rem;"
+          v-if="!useAuth.isLoggedIn"
+        >
+          <RouterLink
+            :to="{ name: 'login' }"
+            v-if="!useAuth.isLoggedIn"
+          >
             <VBtn variant="flat" color="grey-lighten-3">Login</VBtn>
           </RouterLink>
-          <RouterLink :to="{ name: 'register' }">
+          <RouterLink
+            :to="{ name: 'register' }"
+            v-if="!useAuth.isLoggedIn"
+          >
             <VBtn variant="flat" color="grey-lighten-3">Register</VBtn>
           </RouterLink>
         </div>
 
-        <div class="d-flex" style="gap: .5rem;">
+        <div
+          class="d-flex align-center"
+          style="gap: .5rem;"
+          v-if="useAuth.isLoggedIn"
+        >
           <v-btn
             variant="flat"
             color="indigo-darken-3"
-            @click="handleAddNewTask">+ Add New Task</v-btn>
-        </div>
-
-        <div class="d-flex" style="gap: .5rem;">
-          <strong>Hi, {{ useAuth?.user?.email }}</strong>
+            @click="handleAddNewTask"
+            v-if="useAuth.isLoggedIn"
+          >
+            + Add New Task
+          </v-btn>
+          <strong v-if="useAuth.isLoggedIn">Hi, {{ useAuth?.user?.email }}</strong>
           <VBtn
             variant="flat"
             color="grey-lighten-3"
             @click="handleLogout"
+            v-if="useAuth.isLoggedIn"
           >
             Logout  
           </VBtn>
