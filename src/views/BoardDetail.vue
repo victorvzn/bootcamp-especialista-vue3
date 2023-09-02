@@ -6,7 +6,6 @@ import { useRoute } from 'vue-router'
 import { useBoardStore } from '@/stores/board'
 
 import BaseCard from '@/components/shared/BaseCard.vue'
-import CardDetailDialog from '@/components/board-details/CardDetailDialog.vue'
 
 const useBoard = useBoardStore()
 const {
@@ -15,6 +14,22 @@ const {
 } = storeToRefs(useBoard)
 
 const route = useRoute()
+
+const cardSelected = ref(null)
+const showDetailTaskModal = ref(false)
+
+const form = ref({
+  status: ''
+})
+
+const handleDetailCard = (card) => {
+  showDetailTaskModal.value = true
+  cardSelected.value = card
+
+  form.value.status = cardSelected.value.status
+}
+
+const handleSaveDetailTask = () => {}
 </script>
 
 <template>
@@ -38,9 +53,31 @@ const route = useRoute()
         v-for="(card, index) in getCardsBoardByStatus(route.params.id, column)"
         :key="index"
         :card="card"
-      >
-        <CardDetailDialog />
-      </BaseCard>
+        @click="handleDetailCard(card)"
+      />
     </VSheet>
+    <v-dialog
+      v-model="showDetailTaskModal"
+      width="500px"
+    >
+    <v-card :title="cardSelected.title">
+      <v-card-text>
+        <h3 class="mb-2">Title</h3>
+        <h3 class="mb-2">{{ cardSelected.description }}</h3>
+        <h3 class="mb-2">Subtasks</h3>
+
+        {{ cardSelected.subtasks }}
+        {{ cardSelected.status }}
+        
+        <v-form @submit.prevent="handleSaveDetailTask">
+          <v-select
+            :items="useBoard.getColumnsBoardById(route.params.id)"
+            label="Status"
+            v-model="form.status"
+          />
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </div>
 </template>

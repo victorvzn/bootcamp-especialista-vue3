@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount, watch, emit } from 'vue'
 
 import { useBoardStore } from '../../stores/board';
 import { useRoute } from 'vue-router'
@@ -15,6 +15,33 @@ const form = ref({
 })
 
 const handleSaveDetailTask = () => {}
+
+const props = defineProps({
+  showModal: {
+    type: Boolean,
+    default: false
+  },
+  card: {
+    type: Object,
+    default: () => {}
+  }
+})
+
+defineEmits(['onClose'])
+
+watch(() => props.showModal, (newValue, oldValue) => {
+  showDetailTaskModal.value = newValue
+})
+
+watch(showDetailTaskModal, (newValue, oldValue) => {
+  emit('onClose')
+})
+
+onBeforeMount(() => {
+  console.log('modal')
+  showDetailTaskModal.value = props.showModal
+  console.log(showDetailTaskModal.value, props.showModal)
+})
 </script>
 
 <template>
