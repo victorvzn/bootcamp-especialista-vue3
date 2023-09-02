@@ -51,8 +51,20 @@ const handleSaveDetailTask = async () => {
   await useBoard.fetchBoards()
 }
 
-const handleRemoveTask = (id) => {
+const handleRemoveTask = async (id) => {
+  const docId = route.params.id // boardId
+  const taskId = id
+  
   console.log(id)
+
+  await useBoard.deleteTask({
+    docId,
+    taskId
+  })
+
+  await useBoard.fetchBoards()
+
+  showDetailTaskModal.value = false
 }
 </script>
 
@@ -106,6 +118,8 @@ const handleRemoveTask = (id) => {
             v-model="form.status"
           />
         </v-form>
+
+        {{ cardSelected }}
       </template>
     </v-card>
   </v-dialog>

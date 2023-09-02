@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore }  from './stores/auth'
@@ -20,6 +20,17 @@ const form = ref({
 })
 
 const handleAddNewTaskModal = () => showNewTaskModal.value = true
+
+watch(showNewTaskModal, (newValue, oldValue) => {
+  if (!newValue) {
+    form.value = {
+      title: '',
+      description: '',
+      status: '',
+      subtasks: [],
+    }
+  }
+})
 
 const handleLogout = () => {
   useAuth
@@ -47,6 +58,13 @@ const handleSaveNewTask = async () => {
     await useBoard.fetchBoards()
 
     showNewTaskModal.value = false
+
+    form.value = {
+      title: '',
+      description: '',
+      status: '',
+      subtasks: [],
+    }
 
   } catch (error) {
     console.error(error)

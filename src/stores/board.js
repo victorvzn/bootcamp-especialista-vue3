@@ -46,8 +46,27 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
-    async deleteTask (id) {
+    async deleteTask ({
+      docId,
+      taskId
+    }) {
       /* TODO: Eliminar la tarea en el documento de firebase usando el id 12:47 */
+
+      const docRef = doc(db, 'boards', docId)
+
+      const currentTasks = this.getTasksBoard(docId)
+
+      const newTasks = currentTasks.filter(
+        task => task.id !== taskId
+      ) 
+
+      console.log({ newTasks })
+
+      const res = await updateDoc(docRef, {
+        tasks: newTasks
+      })
+
+      return res
     },
     async updateStatusTask({
       docId,
