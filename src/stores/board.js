@@ -40,6 +40,18 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
+    async updateTask({
+      status
+    }) {
+      const docId = null
+      const docRef = doc(db, 'boards', docId)
+
+      // Validar si existe el documente
+
+      await updateDoc(docRef, {})
+
+      const res = await 
+    },
     async createTask({
       docId, title, description, status, subtasks
     }) {

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { useRoute } from 'vue-router'
@@ -22,6 +22,11 @@ const form = ref({
   status: ''
 })
 
+watch(() => form.value.status, (newValue, oldValue) => {
+  console.log(newValue)
+  handleSaveDetailTask()
+})
+
 const handleDetailCard = (card) => {
   showDetailTaskModal.value = true
   cardSelected.value = card
@@ -29,7 +34,10 @@ const handleDetailCard = (card) => {
   form.value.status = cardSelected.value.status
 }
 
-const handleSaveDetailTask = () => {}
+const handleSaveDetailTask = () => {
+
+  console.log(form.value.status.value)
+}
 </script>
 
 <template>
@@ -73,7 +81,7 @@ x
 
         <!-- TODO: Cambiar el estado del card en firebase y actualiza el board sin cerrar el modal -->
         
-        <v-form @submit.prevent="handleSaveDetailTask">
+        <v-form >
           <v-select
             :items="useBoard.getColumnsBoardById(route.params.id)"
             label="Status"
