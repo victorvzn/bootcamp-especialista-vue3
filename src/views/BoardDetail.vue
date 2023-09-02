@@ -50,6 +50,10 @@ const handleSaveDetailTask = async () => {
 
   await useBoard.fetchBoards()
 }
+
+const handleRemoveTask = (id) => {
+  console.log(id)
+}
 </script>
 
 <template>
@@ -68,7 +72,7 @@ const handleSaveDetailTask = async () => {
           inline
         ></v-badge>
         {{ column  }} ({{ getCardsBoardByStatus(route.params.id, column).length }})
-      </h2>
+      </h2> 
       <BaseCard
         v-for="(card, index) in getCardsBoardByStatus(route.params.id, column)"
         :key="index"
@@ -80,20 +84,21 @@ const handleSaveDetailTask = async () => {
       v-model="showDetailTaskModal"
       width="500px"
     >
-    <v-card :title="cardSelected.title">
-      <v-card-text>
-        <h3 class="mb-2">Title</h3>
-        <h3 class="mb-2">{{ cardSelected.description }}</h3>
-        <h3 class="mb-2">Subtasks</h3>
-x
-        {{ cardSelected.subtasks }}
-        {{ cardSelected.status }}
-        {{ cardSelected }}
+    <v-card>
+      <!-- TODO: Cambiar el estado del card en firebase y actualiza el board sin cerrar el modal -->
+      <template v-slot:title>
+        <div class="d-flex justify-space-between align-center">
+          <span>{{ cardSelected.title }}</span>
+          
+          <v-btn density="compact" color="red" @click="handleRemoveTask(cardSelected.id)">Delete</v-btn>
+        </div>
+      </template>
 
-        {{ form.status }}
+      <template v-slot:subtitle>
+        {{ cardSelected.description }}
+      </template>
 
-        <!-- TODO: Cambiar el estado del card en firebase y actualiza el board sin cerrar el modal -->
-        
+      <template v-slot:text>
         <v-form >
           <v-select
             :items="useBoard.getColumnsBoardById(route.params.id)"
@@ -101,7 +106,7 @@ x
             v-model="form.status"
           />
         </v-form>
-      </v-card-text>
+      </template>
     </v-card>
   </v-dialog>
 </div>
