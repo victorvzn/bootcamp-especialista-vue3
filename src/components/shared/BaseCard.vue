@@ -15,5 +15,6 @@ defineProps({
     <template v-slot:subtitle>
       0 of {{ card?.subtasks.length }} subtasks
     </template>
+    <slot></slot>
   </v-card>
 </template>

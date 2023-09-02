@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router'
 import { useBoardStore } from '@/stores/board'
 
 import BaseCard from '@/components/shared/BaseCard.vue'
+import CardDetailDialog from '@/components/board-details/CardDetailDialog.vue'
 
 const useBoard = useBoardStore()
 const {
@@ -37,7 +38,9 @@ const route = useRoute()
         v-for="(card, index) in getCardsBoardByStatus(route.params.id, column)"
         :key="index"
         :card="card"
-      />
+      >
+        <CardDetailDialog />
+      </BaseCard>
     </VSheet>
 </div>
 </template>
