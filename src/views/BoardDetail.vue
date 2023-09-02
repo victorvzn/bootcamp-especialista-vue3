@@ -65,9 +65,13 @@ const handleSaveDetailTask = () => {}
         <h3 class="mb-2">Title</h3>
         <h3 class="mb-2">{{ cardSelected.description }}</h3>
         <h3 class="mb-2">Subtasks</h3>
-
+x
         {{ cardSelected.subtasks }}
         {{ cardSelected.status }}
+
+        {{ form.status }}
+
+        <!-- TODO: Cambiar el estado del card en firebase y actualiza el board sin cerrar el modal -->
         
         <v-form @submit.prevent="handleSaveDetailTask">
           <v-select
