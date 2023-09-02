@@ -8,6 +8,7 @@ import { useBoardStore } from '@/stores/board'
 import BaseCard from '@/components/shared/BaseCard.vue'
 
 const useBoard = useBoardStore()
+
 const {
   getColumnsBoardById,
   getCardsBoardByStatus
@@ -24,7 +25,9 @@ const form = ref({
 
 watch(() => form.value.status, (newValue, oldValue) => {
   console.log(newValue)
-  handleSaveDetailTask()
+  if (newValue != oldValue) {
+    handleSaveDetailTask()
+  }
 })
 
 const handleDetailCard = (card) => {
@@ -34,9 +37,18 @@ const handleDetailCard = (card) => {
   form.value.status = cardSelected.value.status
 }
 
-const handleSaveDetailTask = () => {
+const handleSaveDetailTask = async () => {
+  const docId = route.params.id // boardId
+  const taskId = cardSelected.value.id
+  const newStatus = form.value.status
 
-  console.log(form.value.status.value)
+  console.log({ docId, taskId, newStatus })
+  
+  await useBoard.updateStatusTask(
+    { docId, taskId, newStatus }
+  )
+
+  await useBoard.fetchBoards()
 }
 </script>
 
@@ -76,6 +88,7 @@ const handleSaveDetailTask = () => {
 x
         {{ cardSelected.subtasks }}
         {{ cardSelected.status }}
+        {{ cardSelected }}
 
         {{ form.status }}
 

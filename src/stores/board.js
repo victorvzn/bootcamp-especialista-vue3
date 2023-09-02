@@ -24,6 +24,12 @@ export const useBoardStore = defineStore({
         return boardFound?.columns
       }
     },
+    getTasksBoard(state) {
+      return (boardId) => {
+        const boardFound = state.boards.find(board => board.id === boardId)
+        return boardFound.tasks
+      }
+    },
     getCardsBoardByStatus(state) {
       return (boardId, taskStatus) => {
         const boardFound = state.boards.find(board => board.id === boardId)
@@ -40,17 +46,30 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
-    async updateTask({
-      status
+    async updateStatusTask({
+      docId,
+      taskId,
+      newStatus
     }) {
-      const docId = null
       const docRef = doc(db, 'boards', docId)
 
       // Validar si existe el documente
+      const oldTasks = this.getTasksBoard(docId)
 
-      await updateDoc(docRef, {})
+      const newTasks = oldTasks.map(task => {
+        if (task.id === taskId) {
+          return { ...task, status: newStatus }
+        }
+        return task
+      })
 
-      const res = await 
+      const res = await updateDoc(docRef, {
+        tasks: newTasks
+      })
+
+      console.log('res', res)
+
+      return res
     },
     async createTask({
       docId, title, description, status, subtasks
