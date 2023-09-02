@@ -83,6 +83,7 @@ export const useBoardStore = defineStore({
       try {
         const useAuth = useAuthStore()
         this.loading = true
+        this.boards = []
         const boardsCollection = collection(db, 'boards')
         const q = query(
           boardsCollection,
