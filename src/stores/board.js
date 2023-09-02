@@ -46,6 +46,9 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
+    async deleteTask (id) {
+      /* TODO: Eliminar la tarea en el documento de firebase usando el id 12:47 */
+    },
     async updateStatusTask({
       docId,
       taskId,
