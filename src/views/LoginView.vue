@@ -4,12 +4,7 @@ import { useAuthStore } from '../stores/auth';
 
 import { useRouter } from 'vue-router';
 
-const {
-  getLoading,
-  getUser,
-  getIsAuth,
-  login,
-} = useAuthStore()
+const { login } = useAuthStore()
 
 const router = useRouter()
 
@@ -31,9 +26,6 @@ const handleLogin = async () => {
   <VContainer class="d-flex justify-center">
     <VSheet width="400">
       <h2 class="mb-2">Login</h2>
-      - {{ getIsAuth }} -
-      - {{ getLoading }} -
-      - {{ getUser }} -
       <VForm @submit.prevent="handleLogin">
         <VTextField
           label="Email"
