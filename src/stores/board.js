@@ -46,6 +46,11 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
+    async deleteBoard({
+      docId
+    }) {
+      
+    },
     async deleteTask ({
       docId,
       taskId

@@ -6,7 +6,13 @@ import { useBoardStore } from '@/stores/board'
 
 import { requiredField } from '@/validations'
 
-const { createBoard, getBoards, isLoading, fetchBoards } = useBoardStore()
+const {
+  createBoard,
+  getBoards,
+  isLoading,
+  fetchBoards,
+  deleteBoard
+} = useBoardStore()
 
 const formBoard = ref({
   name: '',
@@ -14,6 +20,7 @@ const formBoard = ref({
 })
 const showNewBoardModal = ref(false)
 const showRemoveBoardModal = ref(false)
+const boardSelected = ref(null)
 
 const refFormNewBoard = ref()
 
@@ -39,12 +46,20 @@ const handleCreateBoard = async () => {
   }
 }
 
-const handleShowRemoveBoardModal = () => {
+const handleShowRemoveBoardModal = (board) => {
   showRemoveBoardModal.value = true
+
+  boardSelected.value = board
 }
 
-const handleRemoveBoard = () => {
+const handleRemoveBoard = async () => {
+  const { id } = boardSelected.value
+  
+  await deleteBoard({ docId: id })
+  
   showRemoveBoardModal.value = false
+
+  await fetchBoards()
 }
 </script>
 
@@ -63,7 +78,7 @@ const handleRemoveBoard = () => {
             <v-btn
               color="grey-lighten-1"
               variant="text"
-              @click="handleShowRemoveBoardModal"
+              @click="handleShowRemoveBoardModal(board)"
             >✖</v-btn>
           </template>
         </v-list-item>
@@ -136,16 +151,8 @@ const handleRemoveBoard = () => {
   <v-dialog
     v-model="showRemoveBoardModal"
     persistent
-    width="auto"
+    width="450"
   >
-    <template v-slot:activator="{ props }">
-      <v-btn
-        v-bind="props"
-        color="grey-lighten-1"
-        variant="text"
-        @click="handleShowRemoveBoardModal"
-      >✖ Delete2</v-btn>
-    </template>
     <v-card>
       <v-card-title class="text-h5">
         Remove board
@@ -153,7 +160,9 @@ const handleRemoveBoard = () => {
       <v-card-text>
         Are you sure you want to delete this board?
 
-        This will delete this board pemanently. You cannot undo this action.
+        <p>This will delete this board pemanently. You cannot undo this action.</p>
+
+        {{ boardSelected }}
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
