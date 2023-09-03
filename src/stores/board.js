@@ -30,6 +30,14 @@ export const useBoardStore = defineStore({
         return boardFound.tasks
       }
     },
+    getColumnsBoard(state) {
+      return (boardId) => {
+        const boardFound = state.boards.find(
+          board => board.id === boardId
+        )
+        return boardFound.columns
+      }
+    },
     getCardsBoardByStatus(state) {
       return (boardId, taskStatus) => {
         const boardFound = state.boards.find(board => board.id === boardId)
@@ -46,6 +54,22 @@ export const useBoardStore = defineStore({
     }
   },
   actions: {
+    async addColumnBoard({
+      docId,
+      columnName
+    }) {
+      const docRef = doc(db, 'boards', docId)
+
+      const oldColumns = this.getColumnsBoard(docId)
+
+      const newColumns = [...oldColumns, columnName]
+
+      const res = await updateDoc(docRef, {
+        columns: newColumns
+      })
+
+      return res
+    },
     async deleteBoard({
       docId
     }) {
