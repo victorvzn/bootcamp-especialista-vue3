@@ -15,7 +15,7 @@ export const useBoardStore = defineStore({
   }),
   getters: {
     getBoards(state) {
-      console.log('111', state.boards)
+      console.log('222', state.boards)
       return state.boards
     },
     getColumnsBoardById: (state) => {
