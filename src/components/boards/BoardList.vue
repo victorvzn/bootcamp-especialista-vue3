@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import { useBoardStore } from '@/stores/board'
 
@@ -21,6 +21,8 @@ const formBoard = ref({
 const showNewBoardModal = ref(false)
 const showRemoveBoardModal = ref(false)
 const boardSelected = ref(null)
+
+const router = useRouter()
 
 const refFormNewBoard = ref()
 
@@ -60,6 +62,8 @@ const handleRemoveBoard = async () => {
   showRemoveBoardModal.value = false
 
   await fetchBoards()
+
+  router.push({ name: 'home' })
 }
 </script>
 

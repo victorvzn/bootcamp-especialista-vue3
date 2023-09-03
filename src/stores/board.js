@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 import { db } from '@/services/firebase'
 
-import { collection, addDoc, getDocs, query, where, doc, updateDoc } from 'firebase/firestore'
+import { collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore'
 
 import { useAuthStore } from '../stores/auth'
 
@@ -49,7 +49,20 @@ export const useBoardStore = defineStore({
     async deleteBoard({
       docId
     }) {
-      
+      try {
+        const docRef = doc(db, 'boards', docId)
+        const docData = await getDoc(docRef)
+
+        if (!docData.exists()) {
+          throw new Error('El board no existe')
+        }
+
+        // Validar si el usuario coincide con el elemento que queremos eliminar
+
+        await deleteDoc(docRef)
+      } catch(error) {
+        console.log(error.message)
+      }
     },
     async deleteTask ({
       docId,
