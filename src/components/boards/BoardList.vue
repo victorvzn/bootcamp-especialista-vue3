@@ -165,8 +165,6 @@ const handleRemoveBoard = async () => {
         Are you sure you want to delete this board?
 
         <p>This will delete this board pemanently. You cannot undo this action.</p>
-
-        {{ boardSelected }}
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
