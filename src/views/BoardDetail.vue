@@ -118,8 +118,6 @@ const handleRemoveTask = async (id) => {
             v-model="form.status"
           />
         </v-form>
-
-        {{ cardSelected }}
       </template>
     </v-card>
   </v-dialog>
