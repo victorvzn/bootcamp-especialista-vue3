@@ -76,7 +76,7 @@ const handleSaveNewTask = async () => {
   <v-app>
     <v-app-bar color="amber-darken-3">
       <v-container class="d-flex justify-space-between">
-        <h1 class="text-h6">Task Managment</h1>
+        <h1 class="text-h6">Task Managment2</h1>
 
         <div
           class="d-flex"
